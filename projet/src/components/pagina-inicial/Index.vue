@@ -14,6 +14,7 @@
               <a class="nav-link active" href="#">Página inicial</a>
             </li>
             <li class="nav-item">
+              <!-- <router-link class="nav-link" to="/component/"></router-link> -->
               <a class="nav-link" href="#">Sobre</a>
             </li>
             <li class="nav-item">
@@ -540,8 +541,7 @@
 export default {
   name: "Index",
   data() {
-    return {
-      
+    return {  
     }
   },
   methods: {
@@ -782,6 +782,10 @@ export default {
 }
 #registar {
   left: 400px;
+}
+input:focus{
+  outline: 0 !important;
+  text-decoration: none;
 }
 /* end_login_and_sigIn  */
 </style>  
