@@ -1,17 +1,19 @@
 <template>
   <div class="principal">
     <nav class="navbar navbar-expand-lg">
-      <div class="container">
-        <a class="navbar-brand" href="#">Egg seller</a>
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">EggSeller</a>
         <button class="navbar-toggler" type="button">
           <span class="navbar-toggler-icon"
             ><i class="fas fa-hamburger"></i
           ></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav m-auto mb-2 mb-lg-0">
+        <div class="collapse navbar-collapse me-auto" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link active" href="#">Página inicial</a>
+              <a class="nav-link active" href="#">
+                <b-icon icon="person" scale="1.34"></b-icon>
+              </a>
             </li>
             <li class="nav-item">
               <!-- <router-link class="nav-link" to="/component/"></router-link> -->
@@ -21,15 +23,6 @@
               <a class="nav-link" href="#">Contactos</a>
             </li>
           </ul>
-          <form class="d-flex">
-            <input
-              class="px-2 search"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn0" type="submit">Search</button>
-          </form>
         </div>
       </div>
     </nav>

@@ -46,7 +46,7 @@
             variant="light"
           ></b-icon>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse me-auto" id="navbarSupportedContent">
           <ul class="navbar-nav mb-2 mb-lg-0 d-flex ms-auto">
             <li class="nav-item dropdown">
               <a
