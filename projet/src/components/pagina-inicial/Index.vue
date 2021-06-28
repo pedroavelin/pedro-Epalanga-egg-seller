@@ -12,11 +12,10 @@
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
               <a class="nav-link active" href="#">
-                <b-icon icon="person" scale="1.34"></b-icon>
+                <b-icon icon="house-door-fill"  class="text-danger m-2" scale="1.34"></b-icon>
               </a>
             </li>
             <li class="nav-item">
-              <!-- <router-link class="nav-link" to="/component/"></router-link> -->
               <a class="nav-link" href="#">Sobre</a>
             </li>
             <li class="nav-item">
