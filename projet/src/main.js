@@ -11,6 +11,7 @@ import App from './App.vue'
 import router from './router'
 Vue.config.productionTip = false
 
+// import '../node_modules/nprogress/nprogress.css'
 // import Admin from './components/dashboard-admin/Admin.vue'
 // import Colaboradores from './components/dashboard-admin/Colaboradores.vue'
 // import Despesas from './components/dashboard-admin/Despesas.vue'

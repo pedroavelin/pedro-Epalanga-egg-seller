@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Offcanvas />
     <!-- end_main_despesas -->
     <main class="mt-5 pt-5 phone">
       <div class="container-fluid">
@@ -23,21 +22,35 @@
           <div class="row">
             <div class="col-lg-12">
               <div class="container">
-                <button type="button" class="btn btn-success py-1 p-2 mb-2">
-                  <b-icon icon="cart-check-fill" scale="1"></b-icon> Registar
+                <button type="button" class="btn btn-success py-1 p-2 mb-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <b-icon icon="cart-check-fill" scale="1" ></b-icon> Registar
                 </button>
               </div>
-              <div class="container mt-3">
-                <form
+
+
+<!-- ==================================================================================================================== -->
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Cadastrar Produto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <form
                   action=""
                   class="row g-3 was-validated needs-validation"
                   novalidate
                 >
-                  <div class="row">
-                    <div class="col-lg-3">
+                  <div class="row mt-3">
+
+                    <div class="col-lg-6">
                       <div class="mb-2">
                         <input
-                          type="number"
+                          type="text"
                           class="form-control py-1"
                           aria-label="file example"
                           required
@@ -46,7 +59,7 @@
                       </div>
                     </div>
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-6">
                       <div class="mb-2">
                         <input
                           type="number"
@@ -57,7 +70,7 @@
                         <div class="invalid-feedback">Preço unitário</div>
                       </div>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-6">
                       <div class="mb-2">
                         <input
                           type="text"
@@ -70,7 +83,7 @@
                       </div>
                     </div>
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-6">
                       <div class="mb-2">
                         <select
                           class="form-select py-1"
@@ -81,15 +94,31 @@
                           <option value="1">M</option>
                           <option value="2">G</option>
                         </select>
-                        <div class="invalid-feedback">Tipo de pagamento</div>
+                        <div class="invalid-feedback">Tipo</div>
                       </div>
 
-                      <button type="button" class="btn btn-success py-1 mb-2">
-                        <b-icon icon="hand-thumbs-up" scale="1"></b-icon> Salvar
-                      </button>
+                     
                     </div>
                   </div>
                 </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success py-1 mb-2 btn-sm">
+          <b-icon icon="hand-thumbs-up" scale="1"></b-icon> Salvar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ==================================================================================================================== -->
+
+
+
+
+              
+              <div class="container mt-3">
+              
                 <hr />
                 <div
                   class="
@@ -144,18 +173,14 @@
       </div>
     </main>
     <!-- end_main_despesas -->
-    <Navbar />
+
   </div>
 </template>
 
 <script>
-import Navbar from "./Navbar";
-import Offcanvas from "./Offcanvas";
+
 export default {
-  components: {
-    Navbar,
-    Offcanvas,
-  },
+ 
 };
 </script>
 

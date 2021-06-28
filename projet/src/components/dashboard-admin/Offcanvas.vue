@@ -42,50 +42,60 @@
             </li>
             <div class="list-group px-2">
               <span class="text-muted p-2">Menu</span>
+               <router-link class="p" to="/encomendas">
               <a
                 href="#"
                 class="
                   list-group-item list-group-item-action
                   bg-danger
                   border-0
-                  active
                 "
                 aria-current="true"
               >
+
                 <b-icon
                   icon="cart-check-fill"
                   class="rounded p-0"
                   variant="white"
+                  active
                 ></b-icon>
-                <router-link to="/dashboard-admin3">Encomendas</router-link>
+                Encomendas
               </a>
+                </router-link>
 
+<router-link to="/produtos">
               <a href="#" class="list-group-item list-group-item-action">
                 <b-icon
                   icon="archive"
                   class="rounded p-0"
                   variant="danger"
                 ></b-icon>
-                <router-link to="/dashboard-admin4"> Produtos</router-link>
+                 Produtos
               </a>
+                 </router-link>
 
+<router-link to="/despesas">
               <a href="#" class="list-group-item list-group-item-action">
                 <b-icon
                   icon="trash"
                   class="rounded p-0"
                   variant="danger"
                 ></b-icon>
-                <router-link to="/dashboard-admin2"> Despesas</router-link>
+                 Despesas
               </a>
-
+                 </router-link>
+            
+            <router-link to="/colaboradores">
               <a href="#" class="list-group-item list-group-item-action">
                 <b-icon
                   icon="person"
                   class="rounded p-0"
                   variant="danger"
                 ></b-icon>
-                <router-link to="/dashboard-admin1"> Colaboradores</router-link>
+                 Colaboradores
               </a>
+                 </router-link>
+
             </div>
           </ul>
         </nav>
@@ -100,4 +110,15 @@ export default {};
 </script>
 
 <style>
+
+a:link, a:visited {
+	text-decoration: none
+	}
+a:hover {
+	text-decoration: aqua; 
+	color: rgb(183, 0, 255)
+	}
+a:active {
+	text-decoration: none
+	}
 </style>

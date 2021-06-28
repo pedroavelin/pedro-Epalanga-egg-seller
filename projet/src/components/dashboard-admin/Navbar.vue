@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="showNavbar">
     <!-- inicio sidebar     -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-danger fixed-top">
       <div class="container-fluid">
@@ -89,7 +89,18 @@
 </template>
 
 <script>
-export default {};
+export default {
+  computed:{
+    showNavbar(){
+      if (this.$route.path == "/Login") {
+        return false
+      }else{
+        return true
+      }
+    }
+  }
+};
+
 </script>
 
 <style>

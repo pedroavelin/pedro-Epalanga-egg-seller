@@ -62,7 +62,7 @@ export default {
 
   methods: {
     login() {
-      this.$router.push({ name: "dashboard-admin4" });
+      this.$router.push({ name: "dashboard-admin" });
     },
   },
 };

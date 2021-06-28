@@ -15,22 +15,22 @@ const routes = [
     component: () => import('../components/dashboard-admin/Admin')
   },
   {
-    path: '/dashboard-admin1',
+    path: '/colaboradores',
     name: 'Lista de colaboradores',
     component: () => import('../components/dashboard-admin/Colaboradores.vue')
   },
   {
-    path: '/dashboard-admin2',
+    path: '/despesas',
     name: 'Lista de despesas',
     component: () => import('../components/dashboard-admin/Despesas.vue')
   },
   {
-    path: '/dashboard-admin3',
+    path: '/encomendas',
     name: 'Lista de encomendas',
     component: () => import('../components/dashboard-admin/Encomendas.vue')
   },
   {
-    path: '/dashboard-admin4',
+    path: '/produtos',
     name: 'Lista de protudos',
     component: () => import('../components/dashboard-admin/Produtos.vue')
   },
@@ -48,3 +48,4 @@ const router = new VueRouter({
 })
 
 export default router
+

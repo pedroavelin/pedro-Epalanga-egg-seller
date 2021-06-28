@@ -1,17 +1,11 @@
 <template>
-  <div>
-
-      <Navbar/>
+  <div>  
       <Encomendas/>
-      <Offcanvas/>
-
-      <router-view/>
   </div>
 </template>
 
 <script>
-import Navbar from './Navbar'
-import Offcanvas from './Offcanvas'
+
 import Encomendas from './Encomendas'
 export default {
   data() {
@@ -20,8 +14,7 @@ export default {
     };
   },
   components:{
-    Navbar,
-    Offcanvas,
+ 
     Encomendas,
   }
 };

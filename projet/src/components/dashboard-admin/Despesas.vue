@@ -1,6 +1,6 @@
 <template>
   <div>
-     <Navbar/>
+
     <!-- end_main_despesas -->
     <main class="mt-5 pt-5 phone">
       <div class="container-fluid">
@@ -170,22 +170,17 @@
       </div>
     </main>
     <!-- end_main_despesas -->
-    <Offcanvas />
+
   </div>
 </template>
 <script>
-import Navbar from "./Navbar";
-import Offcanvas from "./Offcanvas";
+
 export default {
   data(){
     return{
       name: "Despesas"
     };
   },
-  components: {
-    Navbar,
-    Offcanvas,
-  }
 };
 
 </script>
