@@ -2,7 +2,7 @@
   <div>
     <!-- start offcanvas -->
     <div
-      class="offcanvas offcanvas-start sidebar-nav backgroundoffcanvas px-2"
+      class="offcanvas offcanvas-start sidebar-nav background_offcanvas px-2"
       tabindex="-1"
       id="offcanvasExample"
       aria-labelledby="offcanvasExampleLabel"

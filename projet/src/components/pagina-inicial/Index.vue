@@ -32,7 +32,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="#">Preços</a>
+              <a class="nav-link text-white" href="">Preços</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-white" href="#">Sobre</a>
@@ -242,7 +242,7 @@
     </div>
     <!-- end_session_img -->
     <!-- start_session_img_ovos -->
-    <div class="ovosImg">
+    <div class="ovosImg" id="preco">
       <div class="container py-5">
         <div class="row py-5">
           <div class="col-lg-5 m-auto text-center">
@@ -297,7 +297,7 @@
     </div>
     <!-- end_session_img_ovos -->
     <!-- start_session_img_about -->
-    <div class="about">
+    <div class="about ">
       <div class="container py-5">
         <div class="row py-5">
           <div class="col-lg-8 m-auto text-center">

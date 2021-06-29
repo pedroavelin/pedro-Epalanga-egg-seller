@@ -1,6 +1,5 @@
 <template>
   <div class="my-login">
-<router-link to=""></router-link>
     <section class="login py-5 bg-light">
       <div class="container g-5">
         <div class="row">
@@ -14,7 +13,6 @@
 
           <div class="col-md-4 col-lg-7 text-center py-5">
             <h1 class="text-uppercase">Entrar</h1>
-            <form>
               <h4 class="fw-bold py-2">Área administrativa</h4>
               <div class="form-row py-3 pt-3">
                 <div class="offset-1 col-lg-10">
@@ -45,7 +43,6 @@
                   </button>
                 </div>
               </div>
-            </form>
           </div>
         </div>
       </div>
@@ -63,7 +60,8 @@ export default {
 
   methods: {
     login() {
-      this.$router.push({ name: 'Teste' });
+      debugger
+      this.$router.push('/encomendas');
     },
   },
 };
