@@ -1,25 +1,47 @@
 <template>
   <div class="principal">
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">EggSeller</a>
+        <div class="text-muted small fw-bold me-auto" style="font-size: 2rem">
+          <b-icon
+            icon="egg-fill"
+            class="rounded-circle bg-white p-2"
+            variant="warning"
+          ></b-icon>
+
+          <a class="navbar-brand me-auto ms-2 px-2 title text-white" href="#"
+            >EggSeller</a
+          >
+        </div>
+        <!-- 
+      <a class="navbar-brand" href="#">EggSeller</a>
         <button class="navbar-toggler" type="button">
           <span class="navbar-toggler-icon"
             ><i class="fas fa-hamburger"></i
           ></span>
-        </button>
-        <div class="collapse navbar-collapse me-auto" id="navbarSupportedContent">
+        </button> -->
+
+        <div
+          class="collapse navbar-collapse me-auto"
+          id="navbarSupportedContent"
+        >
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
               <a class="nav-link active" href="#">
-                <b-icon icon="house-door-fill"  class="text-danger m-2" scale="1.34"></b-icon>
+                <b-icon icon="house-door-fill" class="" scale="1.2"></b-icon>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Sobre</a>
+              <a class="nav-link text-white" href="#">Preços</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Contactos</a>
+              <a class="nav-link text-white" href="#">Sobre</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#">Contactos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#">Minha conta </a>
             </li>
           </ul>
         </div>
@@ -28,10 +50,14 @@
     <!-- start_login_and_sigIn -->
     <div class="first-content pt-2">
       <div class="form-box">
-        <div class="button-box">
+        <div class="button-box ">
           <div id="btn"></div>
-          <button type="button" class="toggle-btn" @click="entrar()" >Entrar</button>
-          <button type="button" class="toggle-btn" @click="registar()">Registar</button>
+          <button type="button" class="toggle-btn text-info" @click="entrar()">
+            Entrar
+          </button>
+          <button type="button" class="toggle-btn text-info" @click="registar()">
+            Registar
+          </button>
         </div>
         <form id="registar" class="input-group">
           <div class="row">
@@ -62,7 +88,7 @@
                 required
               />
             </div>
-          
+
             <div class="col-lg-6">
               <input
                 type="text"
@@ -120,7 +146,7 @@
           </div>
 
           <div class="container">
-            <button type="submit" class="submit-btn mt-2">Registar</button>
+            <button type="submit" class="submit-btn btn btn-success mt-2">Registar</button>
           </div>
         </form>
         <form id="entrar" class="input-group">
@@ -152,7 +178,12 @@
               </div>
               <div class="col">
                 <label class="">Quantidade</label>
-                <input type="number" class="form-control" pattern="[0-9]" placeholder="" />
+                <input
+                  type="number"
+                  class="form-control"
+                  pattern="[0-9]"
+                  placeholder=""
+                />
               </div>
               <div class="col mt-2">
                 <label class="">Total a pagar</label>
@@ -166,7 +197,7 @@
             </div>
           </div>
           <div class="container">
-            <button type="submit" class="submit-btn mt-3">Encomendar</button>
+            <button type="submit" class="submit-btn mt-3 btn btn-success">Encomendar</button>
           </div>
         </form>
       </div>
@@ -533,20 +564,19 @@
 export default {
   name: "Index",
   data() {
-    return {  
-    }
+    return {};
   },
   methods: {
-    registar(){
-      document.getElementById("entrar").style.left = "-400px"
-      document.getElementById("registar").style.left = "50px"
-      document.getElementById("btn").style.left = "110px"
+    registar() {
+      document.getElementById("entrar").style.left = "-400px";
+      document.getElementById("registar").style.left = "50px";
+      document.getElementById("btn").style.left = "110px";
     },
-    entrar(){
-      document.getElementById("entrar").style.left = "50px"
-      document.getElementById("registar").style.left = "450px"
-      document.getElementById("btn").style.left = "0"
-    }
+    entrar() {
+      document.getElementById("entrar").style.left = "50px";
+      document.getElementById("registar").style.left = "450px";
+      document.getElementById("btn").style.left = "0";
+    },
   },
 };
 </script>
@@ -591,7 +621,7 @@ export default {
   width: 30%;
   outline: none;
   border: none;
-  background: rgb(208,41,75);
+  background: rgb(208, 41, 75);
   color: white;
   border-radius: 60px;
   font-weight: 700;
@@ -606,6 +636,11 @@ export default {
   background-position: 50%, 50%;
   width: 100%;
 }
+/* .gradient {
+  filter: grayscale(10%) sepia(12%) brightness(91%) hue-rotate(360deg);
+  -webkit-filter: grayscale(10%) sepia(12%) brightness(91%) hue-rotate(360deg);
+  -moz-filter: grayscale(10%) sepia(12%) brightness(91%) hue-rotate(360deg);
+} */
 .main h1 {
   font-size: 3rem;
   font-weight: 700;
@@ -618,7 +653,7 @@ export default {
   width: 50%;
   border: none;
   outline: none;
-  background-color: rgb(208,41,75);
+  background-color: rgb(208, 41, 75);
   color: white;
   font-weight: 700;
   border-radius: 60px;
@@ -658,6 +693,9 @@ export default {
 }
 .img_public {
   font-family: "Lobster", cursive;
+  filter: grayscale(10%) sepia(12%) brightness(91%) hue-rotate(360deg);
+  -webkit-filter: grayscale(10%) sepia(12%) brightness(91%) hue-rotate(360deg);
+  -moz-filter: grayscale(10%) sepia(12%) brightness(91%) hue-rotate(360deg);
 }
 /* end_section_img */
 /* start_section_contactos */
@@ -665,7 +703,7 @@ export default {
 /* end_section_contactos */
 /* start_section_footer */
 .footer {
-  background-color: RGB(208,41,103);
+  background-color: RGB(208, 41, 103);
   color: white;
 }
 .btn2 {
@@ -707,7 +745,7 @@ export default {
 }
 .form-box {
   border-radius: 3%;
-  width: 350px;
+  width: 320px;
   height: 480px;
   position: relative;
   margin: 6 auto;
@@ -716,10 +754,10 @@ export default {
   overflow: hidden;
 }
 .button-box {
-  width: 220px;
+  width: 230px;
   margin: 35px auto;
   position: relative;
-  box-shadow: 0 0 20px 9px #0099ff1f;
+  box-shadow: 0 0 20px 19px #0099ff1f;
   border-radius: 100px;
 }
 .toggle-btn {
@@ -734,9 +772,9 @@ export default {
   top: 0;
   left: 0;
   position: absolute;
-  width: 110px;
+  width: 100px;
   height: 44px;
-  background: linear-gradient(to right, rgb(208,41,103), rgb(208,41,103));
+  background: linear-gradient(to right, rgb(208, 41, 103), rgb(208, 41, 103));
   border-radius: 30px;
   transition: 0.5s;
 }
@@ -764,20 +802,28 @@ export default {
   cursor: pointer;
   display: block;
   margin-left: 20px;
-  background: linear-gradient(to right, rgb(92, 160, 238), rgb(0, 135, 212));
   border: 0;
   outline: none;
   border-radius: 30px;
 }
 #entrar {
-  left: 50px;
+  left: 60px;
 }
 #registar {
   left: 400px;
 }
-input:focus{
+input:focus {
   outline: 0 !important;
   text-decoration: none;
+}
+li a {
+  font-family: "Courier New", Courier, monospace;
+}
+li a:hover {
+  background-color: darkgreen;
+}
+.active {
+  background-color: darkgreen;
 }
 /* end_login_and_sigIn  */
 </style>  

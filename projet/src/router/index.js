@@ -1,5 +1,7 @@
 import Vue from 'vue'
+import Teste from '../components/login/Teste.vue'
 import VueRouter from 'vue-router'
+
 
 Vue.use(VueRouter)
 
@@ -8,6 +10,11 @@ const routes = [
     path: '/',
     name: 'index',
     component: () => import('../components/pagina-inicial/Index')
+  },
+  {
+    path: '/teste',
+    name: 'teste',
+    component: Teste
   },
   {
     path: '/dashboard-admin',

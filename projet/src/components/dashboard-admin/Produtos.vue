@@ -13,7 +13,7 @@
               type="search"
               class="form-control pesquisar py-1"
               aria-label="file example"
-              placeholder="pesquisar despesa..."
+              placeholder="pesquisar produto..."
             />
           </div>
           <hr />
@@ -131,7 +131,7 @@
                   <table class="table table-sm table caption-top table-hover">
                     <thead class="table-light text-center text-capitalize">
                       <tr>
-                        <th scope="col">Drecrição</th>
+                        <th scope="col">Descrição</th>
                         <th scope="col">Preço</th>
                         <th scope="col">Quantidade</th>
                         <th scope="col">Tipo</th>

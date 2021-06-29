@@ -1,5 +1,6 @@
 <template>
   <div class="my-login">
+<router-link to=""></router-link>
     <section class="login py-5 bg-light">
       <div class="container g-5">
         <div class="row">
@@ -37,7 +38,7 @@
                 <div class="offset-1 col-lg-10">
                   <button
                     @click="login()"
-                    type="submit"
+                    type=""
                     class="btnEntrar btn-danger text-white btn-outline-success"
                   >
                     Entrar
@@ -62,7 +63,7 @@ export default {
 
   methods: {
     login() {
-      this.$router.push({ name: "dashboard-admin" });
+      this.$router.push({ name: 'Teste' });
     },
   },
 };

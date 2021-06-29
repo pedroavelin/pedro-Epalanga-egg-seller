@@ -92,7 +92,7 @@
 export default {
   computed:{
     showNavbar(){
-      if (this.$route.path == "/Login") {
+      if (this.$route.path == "/login") {
         return false
       }else{
         return true
