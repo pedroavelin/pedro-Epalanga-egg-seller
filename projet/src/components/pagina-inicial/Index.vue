@@ -1,65 +1,24 @@
 <template>
-  <div class="principal">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
-      <div class="container-fluid">
-        <div class="text-muted small fw-bold me-auto" style="font-size: 2rem">
-          <b-icon
-            icon="egg-fill"
-            class="rounded-circle bg-white p-2"
-            variant="warning"
-          ></b-icon>
-
-          <a class="navbar-brand me-auto ms-2 px-2 title text-white" href="#"
-            >EggSeller</a
-          >
-        </div>
-        <!-- 
-      <a class="navbar-brand" href="#">EggSeller</a>
-        <button class="navbar-toggler" type="button">
-          <span class="navbar-toggler-icon"
-            ><i class="fas fa-hamburger"></i
-          ></span>
-        </button> -->
-
-        <div
-          class="collapse navbar-collapse me-auto"
-          id="navbarSupportedContent"
-        >
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link active" href="#">
-                <b-icon icon="house-door-fill" class="" scale="1.2"></b-icon>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="">Preços</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#">Sobre</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#">Contactos</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#">Minha conta </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+  <div class="principal ">
+   <Navbar/>
+   <div class="pt-1 mt-5">
     <!-- start_login_and_sigIn -->
-    <div class="first-content pt-2">
+    <div class="first-content mt-3">
       <div class="form-box">
-        <div class="button-box ">
+        <div class="button-box">
           <div id="btn"></div>
           <button type="button" class="toggle-btn text-info" @click="entrar()">
             Entrar
           </button>
-          <button type="button" class="toggle-btn text-info" @click="registar()">
+          <button
+            type="button"
+            class="toggle-btn text-info"
+            @click="registar()"
+          >
             Registar
           </button>
         </div>
-        <form id="registar" class="input-group">
+        <div id="registar" class="input-group">
           <div class="row">
             <div class="col-lg-6">
               <input
@@ -146,10 +105,12 @@
           </div>
 
           <div class="container">
-            <button type="submit" class="submit-btn btn btn-success mt-2">Registar</button>
+            <button type="submit" class="submit-btn btn btn-success mt-2">
+              Registar
+            </button>
           </div>
-        </form>
-        <form id="entrar" class="input-group">
+        </div>
+        <div id="entrar" class="input-group">
           <input
             type="text"
             class="form-control input-field"
@@ -197,18 +158,20 @@
             </div>
           </div>
           <div class="container">
-            <button type="submit" class="submit-btn mt-3 btn btn-success">Encomendar</button>
+            <button type="submit" class="submit-btn mt-3 btn btn-success">
+              Encomendar
+            </button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
     <!-- end_login_and_sigIn -->
     <!-- start_main_session -->
-    <div class="main">
+    <div class="main ">
       <div class="container gradient py-5">
         <div class="row py-4">
           <div class="col-lg-7 pt-4 text-center">
-            <h1>
+            <h1 class="textoPrincipal">
               Faça sua encomenda de ovos com apenas um click sem sair de casa
             </h1>
             <button class="btn1 mt-3">Encomendar</button>
@@ -218,86 +181,89 @@
     </div>
     <!-- end_main_session -->
     <!-- start_session_img -->
-    <div class="new">
-      <div class="container py-5">
-        <div class="row pt-5">
-          <div class="col-lg-7 m-auto">
-            <div class="row text-center">
-              <div class="col-lg-4">
-                <div class="img1"><span></span></div>
-                <h6>Rijop</h6>
-              </div>
-              <div class="col-lg-4">
-                <div class="img1"><span></span></div>
-                <h6>Rijop</h6>
-              </div>
-              <div class="col-lg-4">
-                <div class="img1"><span></span></div>
-                <h6>Rijop</h6>
-              </div>
-            </div>
-          </div>
+    <div class="container col-lg-10 m-auto text-center ">
+      <div class="row pt-5">
+        <div class="col-lg-4">
+          <h4>Disponibilidade</h4>
+          <h6>7h:30 até 19h:10</h6>
+          <b-icon icon="alarm" variant="success" font-scale="4.5"></b-icon>
+          <p>De segunda á segunda</p>
+        </div>
+        <div class="col-lg-4">
+          <h4>Entregas sem custo</h4>
+          <h6>Na compra de 10 caixas no mínimo</h6>
+          <b-icon icon="cash" variant="danger" font-scale="4.5"></b-icon>
+          <p>Negociável</p>
+        </div>
+        <div class="col-lg-4">
+          <h4>Ovo de qualidade nacional</h4>
+          <h6>Angola</h6>
+          <b-icon icon="egg" variant="warning" font-scale="4.5"></b-icon>
+          <p>De segunda á segunda</p>
         </div>
       </div>
     </div>
     <!-- end_session_img -->
     <!-- start_session_img_ovos -->
     <div class="ovosImg" id="preco">
-      <div class="container py-5">
-        <div class="row py-5">
+      <div class="container">
+        <div class="row py-3">
           <div class="col-lg-5 m-auto text-center">
-            <h1 class="h">Encomende a aqui!...</h1>
-            <h6>Compre o que quiser</h6>
+            <h1 class="h text-black-40">Encomende a aqui!...</h1>
+            <h4>Compre o que quiser</h4>
           </div>
         </div>
         <div class="row">
-          <div class="col-lg-3 text-center">
-            <div class="card-border-0 bg-light mb-2">
-              <div class="card-body">
-                <img class="img1" src="" alt="" />
-              </div>
+          <div class="col-lg-3">
+            <img
+              src="https://image.raku-uru.jp/01/7963/41/%E8%B5%A4%E7%8E%89%E5%9C%B0%E9%A4%8A%E5%8D%B5%E7%94%9F%E5%8D%B5_1587977283718_1200.JPG"
+              class="img-fluid mb-3"
+              alt=""
+            />
+            <h5>Prato x</h5>
+            <div class="text-center">
+              <button class="btn0 mb-2" type="submit">Saber +</button>
             </div>
-            <h6>WWWWWWWWWWW</h6>
-            <p>200,99kz</p>
           </div>
-          <div class="col-lg-3 text-center">
-            <div class="card-border-0 bg-light mb-2">
-              <div class="card-body">
-                <img class="img1" src="" alt="" />
-              </div>
+          <div class="col-lg-3">
+            <img
+              src="https://image.raku-uru.jp/01/7963/41/%E8%B5%A4%E7%8E%89%E5%9C%B0%E9%A4%8A%E5%8D%B5%E7%94%9F%E5%8D%B5_1587977283718_1200.JPG"
+              class="img-fluid mb-3"
+              alt=""
+            />
+            <h5>Prato x</h5>
+            <div class="text-center">
+              <button class="btn0 mb-2" type="submit">Saber +</button>
             </div>
-            <h6>WWWWWWWWWWW</h6>
-            <p>200,99kz</p>
           </div>
-          <div class="col-lg-3 text-center">
-            <div class="card-border-0 bg-light mb-2">
-              <div class="card-body">
-                <img class="img1" src="" alt="" />
-              </div>
+          <div class="col-lg-3">
+            <img
+              src="https://image.raku-uru.jp/01/7963/41/%E8%B5%A4%E7%8E%89%E5%9C%B0%E9%A4%8A%E5%8D%B5%E7%94%9F%E5%8D%B5_1587977283718_1200.JPG"
+              class="img-fluid mb-3"
+              alt=""
+            />
+            <h5>Prato x</h5>
+            <div class="text-center">
+              <button class="btn0 mb-2" type="submit">Saber +</button>
             </div>
-            <h6>WWWWWWWWWWW</h6>
-            <p>200,99kz</p>
           </div>
-          <div class="col-lg-3 text-center">
-            <div class="card-border-0 bg-light mb-2">
-              <div class="card-body">
-                <img class="img1" src="" alt="" />
-              </div>
+          <div class="col-lg-3">
+            <img
+              src="https://image.raku-uru.jp/01/7963/41/%E8%B5%A4%E7%8E%89%E5%9C%B0%E9%A4%8A%E5%8D%B5%E7%94%9F%E5%8D%B5_1587977283718_1200.JPG"
+              class="img-fluid mb-3"
+              alt=""
+            />
+            <h5>Prato x</h5>
+            <div class="text-center">
+              <button class="btn0 mb-2" type="submit">Saber +</button>
             </div>
-            <h6>WWWWWWWWWWW</h6>
-            <p>200,99kz</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-6 text-center m-auto">
-            <button class="btn0" type="submit">Search</button>
           </div>
         </div>
       </div>
     </div>
     <!-- end_session_img_ovos -->
     <!-- start_session_img_about -->
-    <div class="about ">
+    <div class="about" id="sobre">
       <div class="container py-5">
         <div class="row py-5">
           <div class="col-lg-8 m-auto text-center">
@@ -307,35 +273,46 @@
         </div>
         <div class="row">
           <div class="col-lg-4">
-            <img src="" class="img-fluid mb-3" alt="" />
-            <h5>Lorem ipsum dolor</h5>
+            <!-- <div class="card-body"></div> -->
+            <img
+              src="https://image.raku-uru.jp/01/7963/41/%E8%B5%A4%E7%8E%89%E5%9C%B0%E9%A4%8A%E5%8D%B5%E7%94%9F%E5%8D%B5_1587977283718_1200.JPG"
+              class="img-fluid mb-3"
+              alt=""
+            />
+            <h5>Prato x</h5>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
-              ipsam modi sequi amet esse omnis enim laboriosam eius explicabo
-              dolorem ratione quasi, minima incidunt facere beatae pariatur
-              maxime eos dolorum?
+              ipsam modi sequi amet.
             </p>
-            <button class="btn0 mb-2" type="submit">Search</button>
+            <div class="text-center">
+              <button class="btn0 mb-2" type="submit">Saber +</button>
+            </div>
           </div>
           <div class="col-lg-4">
-            <img src="" class="img-fluid mb-3" alt="" />
-            <h5>Lorem ipsum dolor</h5>
+            <img
+              src="https://image.raku-uru.jp/01/7963/41/%E8%B5%A4%E7%8E%89%E5%9C%B0%E9%A4%8A%E5%8D%B5%E7%94%9F%E5%8D%B5_1587977283718_1200.JPG"
+              class="img-fluid mb-3"
+              alt=""
+            />
+            <h5>Prato y</h5>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
-              ipsam modi sequi amet esse omnis enim laboriosam eius explicabo
-              dolorem ratione quasi, minima incidunt facere beatae pariatur
-              maxime eos dolorum?
+               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
+              ipsam modi sequi amet.
             </p>
-            <button class="btn0 mb-2" type="submit">Search</button>
+            <div class="text-center">
+              <button class="btn0 mb-2" type="submit">Saber +</button>
+            </div>
           </div>
           <div class="col-lg-4">
-            <img src="" class="img-fluid" alt="" />
-            <h5>Lorem ipsum dolor</h5>
+            <img
+              src="https://image.raku-uru.jp/01/7963/41/%E8%B5%A4%E7%8E%89%E5%9C%B0%E9%A4%8A%E5%8D%B5%E7%94%9F%E5%8D%B5_1587977283718_1200.JPG"
+              class="img-fluid mb-3"
+              alt=""
+            />
+            <h5>Prato z</h5>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
-              ipsam modi sequi amet esse omnis enim laboriosam eius explicabo
-              dolorem ratione quasi, minima incidunt facere beatae pariatur
-              maxime eos dolorum?
+               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
+              ipsam modi sequi amet.
             </p>
             <button class="btn0 mb-2" type="submit">Search</button>
           </div>
@@ -355,8 +332,17 @@
         <div class="row">
           <div class="col-lg-3 text-center">
             <div class="card-border-0 bg-light mb-2">
-              <div class="card-body">
-                <img class="img1" src="" alt="" />
+              <div class="">
+                <img class="img1" src="https://th.bing.com/th/id/Rcbf4ed1b1d85a76a2558a4695b0a156d?rik=f6ZDIfsBtwt6HA&riu=http%3a%2f%2f1.bp.blogspot.com%2f_RoSt4bkOFUQ%2fRnu34x88ibI%2fAAAAAAAAAAo%2fcyByqPLv9FU%2fw1200-h630-p-k-no-nu%2fhuevos.jpg&ehk=6Pu1MED5LJXoCl6kgNvS9Qs%2fNXagUVpEFPH7bGXCLFE%3d&risl=&pid=ImgRaw" alt="" />
+              </div>
+            </div>
+            <h6>WWWWWWWWWWW</h6>
+            <p>200,99kz</p>
+          </div>
+          <div class="col-lg-3 text-center">
+            <div class="card-border-0 mb-2">
+              <div class="">
+                <img class="img1" src="https://th.bing.com/th/id/Rcbf4ed1b1d85a76a2558a4695b0a156d?rik=f6ZDIfsBtwt6HA&riu=http%3a%2f%2f1.bp.blogspot.com%2f_RoSt4bkOFUQ%2fRnu34x88ibI%2fAAAAAAAAAAo%2fcyByqPLv9FU%2fw1200-h630-p-k-no-nu%2fhuevos.jpg&ehk=6Pu1MED5LJXoCl6kgNvS9Qs%2fNXagUVpEFPH7bGXCLFE%3d&risl=&pid=ImgRaw" alt="" />
               </div>
             </div>
             <h6>WWWWWWWWWWW</h6>
@@ -364,8 +350,8 @@
           </div>
           <div class="col-lg-3 text-center">
             <div class="card-border-0 bg-light mb-2">
-              <div class="card-body">
-                <img class="img1" src="" alt="" />
+              <div class="">
+                <img class="img1" src="https://th.bing.com/th/id/Rcbf4ed1b1d85a76a2558a4695b0a156d?rik=f6ZDIfsBtwt6HA&riu=http%3a%2f%2f1.bp.blogspot.com%2f_RoSt4bkOFUQ%2fRnu34x88ibI%2fAAAAAAAAAAo%2fcyByqPLv9FU%2fw1200-h630-p-k-no-nu%2fhuevos.jpg&ehk=6Pu1MED5LJXoCl6kgNvS9Qs%2fNXagUVpEFPH7bGXCLFE%3d&risl=&pid=ImgRaw" alt="" />
               </div>
             </div>
             <h6>WWWWWWWWWWW</h6>
@@ -373,17 +359,8 @@
           </div>
           <div class="col-lg-3 text-center">
             <div class="card-border-0 bg-light mb-2">
-              <div class="card-body">
-                <img class="img1" src="" alt="" />
-              </div>
-            </div>
-            <h6>WWWWWWWWWWW</h6>
-            <p>200,99kz</p>
-          </div>
-          <div class="col-lg-3 text-center">
-            <div class="card-border-0 bg-light mb-2">
-              <div class="card-body">
-                <img class="img1" src="" alt="" />
+              <div class="">
+                <img class="img1" src="https://th.bing.com/th/id/Rcbf4ed1b1d85a76a2558a4695b0a156d?rik=f6ZDIfsBtwt6HA&riu=http%3a%2f%2f1.bp.blogspot.com%2f_RoSt4bkOFUQ%2fRnu34x88ibI%2fAAAAAAAAAAo%2fcyByqPLv9FU%2fw1200-h630-p-k-no-nu%2fhuevos.jpg&ehk=6Pu1MED5LJXoCl6kgNvS9Qs%2fNXagUVpEFPH7bGXCLFE%3d&risl=&pid=ImgRaw" alt="" />
               </div>
             </div>
             <h6>WWWWWWWWWWW</h6>
@@ -393,8 +370,8 @@
         <div class="row">
           <div class="col-lg-3 text-center">
             <div class="card-border-0 bg-light mb-2">
-              <div class="card-body">
-                <img class="img1" src="" alt="" />
+              <div class="">
+                <img class="img1" src="https://th.bing.com/th/id/Rcbf4ed1b1d85a76a2558a4695b0a156d?rik=f6ZDIfsBtwt6HA&riu=http%3a%2f%2f1.bp.blogspot.com%2f_RoSt4bkOFUQ%2fRnu34x88ibI%2fAAAAAAAAAAo%2fcyByqPLv9FU%2fw1200-h630-p-k-no-nu%2fhuevos.jpg&ehk=6Pu1MED5LJXoCl6kgNvS9Qs%2fNXagUVpEFPH7bGXCLFE%3d&risl=&pid=ImgRaw" alt="" />
               </div>
             </div>
             <h6>WWWWWWWWWWW</h6>
@@ -402,8 +379,8 @@
           </div>
           <div class="col-lg-3 text-center">
             <div class="card-border-0 bg-light mb-2">
-              <div class="card-body">
-                <img class="img1" src="" alt="" />
+              <div class="">
+                <img class="img1" src="https://th.bing.com/th/id/Rcbf4ed1b1d85a76a2558a4695b0a156d?rik=f6ZDIfsBtwt6HA&riu=http%3a%2f%2f1.bp.blogspot.com%2f_RoSt4bkOFUQ%2fRnu34x88ibI%2fAAAAAAAAAAo%2fcyByqPLv9FU%2fw1200-h630-p-k-no-nu%2fhuevos.jpg&ehk=6Pu1MED5LJXoCl6kgNvS9Qs%2fNXagUVpEFPH7bGXCLFE%3d&risl=&pid=ImgRaw" alt="" />
               </div>
             </div>
             <h6>WWWWWWWWWWW</h6>
@@ -411,8 +388,8 @@
           </div>
           <div class="col-lg-3 text-center">
             <div class="card-border-0 bg-light mb-2">
-              <div class="card-body">
-                <img class="img1" src="" alt="" />
+              <div class="">
+                <img class="img1" src="https://th.bing.com/th/id/Rcbf4ed1b1d85a76a2558a4695b0a156d?rik=f6ZDIfsBtwt6HA&riu=http%3a%2f%2f1.bp.blogspot.com%2f_RoSt4bkOFUQ%2fRnu34x88ibI%2fAAAAAAAAAAo%2fcyByqPLv9FU%2fw1200-h630-p-k-no-nu%2fhuevos.jpg&ehk=6Pu1MED5LJXoCl6kgNvS9Qs%2fNXagUVpEFPH7bGXCLFE%3d&risl=&pid=ImgRaw" alt="" />
               </div>
             </div>
             <h6>WWWWWWWWWWW</h6>
@@ -420,8 +397,8 @@
           </div>
           <div class="col-lg-3 text-center">
             <div class="card-border-0 bg-light mb-2">
-              <div class="card-body">
-                <img class="img1" src="" alt="" />
+              <div class="">
+                <img class="img1" src="https://th.bing.com/th/id/Rcbf4ed1b1d85a76a2558a4695b0a156d?rik=f6ZDIfsBtwt6HA&riu=http%3a%2f%2f1.bp.blogspot.com%2f_RoSt4bkOFUQ%2fRnu34x88ibI%2fAAAAAAAAAAo%2fcyByqPLv9FU%2fw1200-h630-p-k-no-nu%2fhuevos.jpg&ehk=6Pu1MED5LJXoCl6kgNvS9Qs%2fNXagUVpEFPH7bGXCLFE%3d&risl=&pid=ImgRaw" alt="" />
               </div>
             </div>
             <h6>WWWWWWWWWWW</h6>
@@ -449,7 +426,7 @@
     </div>
     <!-- end_section_img -->
     <!-- start_section_contactos -->
-    <div class="contatos py-5">
+    <div class="contatos py-5" id="contactos">
       <div class="container py-5">
         <div class="row">
           <div class="col-lg-5 m-auto text-center">
@@ -457,15 +434,19 @@
             <h6>Sinta-se a vontade para nos contactar</h6>
           </div>
         </div>
-        <div class="row py-5">
+        <div class="row py-5 contactos">
           <div class="col-lg-9 m-auto">
             <div class="row">
               <div class="col-lg-4">
-                <h6>Nossa localização</h6>
+                <b-icon icon="geo-alt-fill" class="" scale="1"></b-icon
+                ><span class="fw-bold"> Nossa localização</span>
+
                 <p>Angola - Luanda, Cacuaco - Bairro Nova Urbanização</p>
-                <h6>Telefone</h6>
+                <b-icon icon="phone" class="" scale="1"></b-icon
+                ><span class="fw-bold"> Telefone</span>
                 <p>+244 928 973 909</p>
-                <h6>Email</h6>
+                <b-icon icon="envelope" class="" scale="1"></b-icon
+                ><span class="fw-bold"> E-mail</span>
                 <p>rijop@gmail.com</p>
               </div>
               <div class="col-lg-7">
@@ -509,62 +490,22 @@
       </div>
     </div>
     <!-- end_section_contactos -->
-    <!-- start_section_footer -->
-    <div class="footer py-5">
-      <div class="container py-5">
-        <div class="row">
-          <div class="col-lg-9 m-auto text-center">
-            <h1>Estamos em todos os lugares</h1>
-            <input type="text" class="px-3" placeholder="Digite o seu nome" />
-            <button class="btn2">Enviar</button>
-          </div>
-        </div>
-        <div class="row py-5">
-          <div class="col-lg-11">
-            <div class="row">
-              <div class="col-lg-3">
-                <h5>Lorem ipsum dolor sit</h5>
-                <p>Lorem</p>
-                <p>Lorem ipsum</p>
-                <p>Lorem ipsum sit</p>
-              </div>
-              <div class="col-lg-3">
-                <h5>Lorem ipsum dolor sit</h5>
-                <p>Lorem</p>
-                <p>Lorem ipsum</p>
-                <p>Lorem ipsum sit</p>
-              </div>
-              <div class="col-lg-3">
-                <h5>Lorem ipsum dolor sit</h5>
-                <p>Lorem</p>
-                <p>Lorem ipsum</p>
-                <p>Lorem ipsum sit</p>
-              </div>
-              <div class="col-lg-3">
-                <h5>Lorem ipsum dolor sit</h5>
-                <span><i class="fa fa-facebook"></i></span>
-                <span><i class="fa fa-facebook"></i></span>
-                <span><i class="fa fa-facebook"></i></span>
-                <span><i class="fa fa-facebook"></i></span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <hr />
-        <p class="text-center">
-          Copyrigt 2021 todos os direitos reservados | avelinopedro5@gmail.com
-        </p>
-      </div>
-    </div>
-    <!-- end_section_footer -->
+   <Footer/>
+   </div>
   </div>
 </template>
 
 <script>
+import Navbar from "./Navbar"
+import Footer from "./Footer"
 export default {
   name: "Index",
   data() {
     return {};
+  },
+  components:{
+    Navbar,
+    Footer
   },
   methods: {
     registar() {
@@ -588,6 +529,7 @@ export default {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  
 }
 
 /* adicionando estilo no link RIJOP */
@@ -605,17 +547,8 @@ export default {
   color: black;
   text-transform: uppercase;
 }
-.nav-link:hover {
-  color: burlywood;
-}
-.search {
-  height: 40px;
-  width: 80%;
-  border-radius: 60px;
-  outline: none;
-  margin-right: -35px;
-  border: 2px solid rgb(248, 26, 92);
-}
+
+
 .btn0 {
   height: 40px;
   width: 30%;
@@ -629,12 +562,12 @@ export default {
 /* =================================End NAVBAR==================== */
 /* start_session */
 .main {
-  background: url("https://i.etsystatic.com/13485242/r/il/7b7da5/2481898650/il_794xN.2481898650_8wfj.jpg")
-    no-repeat;
+  background: url("https://i.etsystatic.com/13485242/r/il/7b7da5/2481898650/il_794xN.2481898650_8wfj.jpg") no-repeat;
   background-size: cover;
-  height: 90vh;
+  height: 88vh;
   background-position: 50%, 50%;
   width: 100%;
+
 }
 /* .gradient {
   filter: grayscale(10%) sepia(12%) brightness(91%) hue-rotate(360deg);
@@ -645,9 +578,10 @@ export default {
   font-size: 3rem;
   font-weight: 700;
   color: aliceblue;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: "Tangerine", serif;
+  font-size: 48px;
 }
+
 .btn1 {
   height: 45px;
   width: 50%;
@@ -666,10 +600,8 @@ export default {
   font-weight: 700;
 }
 .card-body {
-  background: url("https://img.welt.de/img/wirtschaft/mobile114882314/1442505187-ci102l-w1024/3376-jpg.jpg")
-    no-repeat;
-  height: 30vh;
-  width: 100%;
+  height: 20vh;
+  width: 90%;
 }
 .card-body:hover {
   box-shadow: -1px -1px -25px -4px rgba(0, 0, 0, 0.75);
@@ -702,10 +634,7 @@ export default {
 
 /* end_section_contactos */
 /* start_section_footer */
-.footer {
-  background-color: RGB(208, 41, 103);
-  color: white;
-}
+
 .btn2 {
   height: 45px;
   width: 100px;
@@ -713,19 +642,6 @@ export default {
   margin-left: -10px;
   border: 2px solid white;
   font-weight: 600;
-}
-.footer input {
-  height: 45px;
-  width: 55%;
-  border: 2px solid white;
-  outline: none;
-  background: black;
-  color: white;
-  margin-top: 20px;
-  font-weight: 600;
-}
-.footer::placeholder {
-  color: white;
 }
 .footer p {
   margin: 0;
@@ -742,6 +658,7 @@ export default {
   background-size: cover;
   position: absolute;
   margin-left: 72%;
+  /* margin-top: 50px; */
 }
 .form-box {
   border-radius: 3%;
@@ -816,14 +733,17 @@ input:focus {
   outline: 0 !important;
   text-decoration: none;
 }
-li a {
-  font-family: "Courier New", Courier, monospace;
+
+.contactos {
+  background: url("https://png.pngtree.com/thumb_back/fw800/back_pic/03/52/87/595794e04b98e6d.jpg")
+    no-repeat;
+  background-size: cover;
+  filter: grayscale(19%) sepia(3%) brightness(108%) saturate(99%);
+  -webkit-filter: grayscale(19%) sepia(3%) brightness(108%) saturate(99%);
+  -moz-filter: grayscale(19%) sepia(3%) brightness(108%) saturate(99%);
 }
-li a:hover {
-  background-color: darkgreen;
-}
-.active {
-  background-color: darkgreen;
+.hideScroll{
+  overflow-y: hidden;
 }
 /* end_login_and_sigIn  */
 </style>  
