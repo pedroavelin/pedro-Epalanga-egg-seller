@@ -3,7 +3,7 @@
    <Navbar/>
    <div class="pt-1 mt-5">
     <!-- start_login_and_sigIn -->
-    <div class="first-content mt-3 animate__animated animate__backInDown animate__delay-1s">
+    <div class="first-content mt-3 animate__animated animate__zoomIn animate__delay-4s">
       <div class="form-box">
         <div class="button-box">
           <div id="btn"></div>
@@ -172,7 +172,10 @@
         <div class="row py-4">
           <div class="col-lg-7 pt-4 text-center">
             <h1 class="textoPrincipal">
-              Faça sua encomenda de ovos com apenas um click sem sair de casa
+              <p class="animate__animated animate__zoomIn animate__delay-0s">Faça </p>
+              <p class="animate__animated animate__zoomIn animate__delay-1s"> sua encomenda de ovos</p>
+              <p class="animate__animated animate__zoomIn animate__delay-2s"> com apenas um click</p>
+              <p class="animate__animated animate__zoomIn animate__delay-3s"> sem sair de casa</p>
             </h1>
             <button class="btn1 mt-3">Encomendar</button>
           </div>
