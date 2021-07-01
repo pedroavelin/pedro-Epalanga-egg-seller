@@ -65,7 +65,7 @@
               <input
                 type="text"
                 class="form-control input-field"
-                id="nomeUsuario"
+                id="nomeUsu"
                 placeholder="Seu nome"
                 required
               />
@@ -474,8 +474,8 @@
                     <input
                       type="text"
                       class="form-control bg-light"
-                      name=""
-                      id=""
+                      name="email"
+                      id="email"
                       placeholder="Digite o seu nome"
                     />
                   </div>

@@ -2,8 +2,8 @@
   <div class="my-login">
     <section class="login py-5 bg-light">
       <div class="container g-5">
-        <div class="row">
-          <div class="col-md-8 col-lg-5">
+        <div class="row content">
+          <div class="col-md-6 col-lg-6">
             <img
               src="https://image.freepik.com/fotos-gratis/ovos-de-galinha-marrom-em-rack-na-mesa-cinza_23-2148067251.jpg"
               class="img-responsive"
@@ -11,7 +11,7 @@
             />
           </div>
 
-          <div class="col-md-4 col-lg-7 text-center py-5">
+          <div class="col-md-6 col-lg-6 text-center py-5">
             <h1 class="text-uppercase">Entrar</h1>
               <h4 class="fw-bold py-2">Área administrativa</h4>
               <div class="form-row py-3 pt-3">
@@ -73,13 +73,14 @@ export default {
   margin: 0;
   box-sizing: border-box;
 }
-.row {
+.content {
   background: white;
   /* border-radius: 20px; */
   box-shadow: 10px 10px 15px -4px rgba(163, 10, 10, 0.75);
   -webkit-box-shadow: 10px 10px 15px -4px rgba(163, 10, 10, 0.75);
   -moz-box-shadow: 10px 10px 15px -4px rgba(163, 10, 10, 0.75);
 }
+
 .login img {
   padding-right: 10px;
   padding-bottom: 0;

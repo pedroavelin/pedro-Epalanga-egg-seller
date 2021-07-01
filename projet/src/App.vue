@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Navbar v-if="showNavbar" />
-    <Offcanvas v-if="showOffcanvas"/>
+    <Offcanvas v-if="showOffcanvas" />
     <router-view />
   </div>
 </template>
@@ -17,20 +17,19 @@ export default {
   computed: {
     showNavbar() {
       // debugger
-      if (this.$route.path == "/" || this.$route.path == "/Login" ) {
+      if ((this.$route.path == "/") || (this.$route.path == "/Login")) {
         return false;
-      }else{
+      } else {
         return true;
       }
     },
-    showOffcanvas(){
-      if(this.$route.path == "/Login" || this.$route.path =="/"){
-          return false;
-        } 
-        return true;
-    }
-    
+    showOffcanvas() {
+      if ((this.$route.path == "/") || (this.$route.path == "/Login")) {
+        return false;
+      }
+      return true;
     },
+  },
 };
 </script>
 
