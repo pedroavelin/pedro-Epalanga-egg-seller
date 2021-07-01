@@ -3,7 +3,7 @@
    <Navbar/>
    <div class="pt-1 mt-5">
     <!-- start_login_and_sigIn -->
-    <div class="first-content mt-3">
+    <div class="first-content mt-3 animate__animated animate__backInDown animate__delay-1s">
       <div class="form-box">
         <div class="button-box">
           <div id="btn"></div>
@@ -746,4 +746,5 @@ input:focus {
   overflow-y: hidden;
 }
 /* end_login_and_sigIn  */
+
 </style>  
