@@ -1,6 +1,6 @@
 <template>
-<div>
-      <!-- start_main_calaboradores -->
+  <div>
+    <!-- start_main_calaboradores -->
     <main class="mt-5 pt-5 phone">
       <div class="container-fluid">
         <div class="row">
@@ -22,14 +22,20 @@
           <div class="row">
             <div class="col-lg-12">
               <div class="container">
-                            <!-- Button trigger modal -->
-               <div >
-                          <button class="btn btn-success" type="submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                            Cadastrar
-                            <b-icon icon="caret-right-fill" scale="1"></b-icon>
-                          </button>
-                        </div>
+                <!-- Button trigger modal -->
+                <div>
+                  <button
+                    class="btn btn-success"
+                    type="submit"
+                    data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop"
+                  >
+                    Cadastrar
+                    <b-icon icon="caret-right-fill" scale="1"></b-icon>
+                  </button>
+                </div>
                 <hr />
+
                 <div
                   class="
                     table-responsive table-responsive-xl
@@ -53,45 +59,17 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td scope="row">Pedro Epalanga</td>
-                        <td>928973909</td>
-                        <td>avelinopedro5@gmail.com</td>
-                        <td>Luanda</td>
-                        <td>Cacuaco</td>
-                        <td>Nova Urbanização</td>
-                        <td>22</td>
-                        <td>284.989,00</td>
-                        <td>
-                          <div
-                            class="btn-group btn-group-sm"
-                            role="group"
-                            aria-label="Basic mixed styles example"
-                          >
-                            <button
-                              type="button"
-                              class="btn text-white bg-info"
-                            >
-                              <b-icon
-                                icon="person-lines-fill"
-                                scale="1"
-                              ></b-icon>
-                            </button>
-                            <button type="button" class="btn btn-danger">
-                              <b-icon icon="trash" scale="1"></b-icon>
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td scope="row">Pedro Epalanga</td>
-                        <td>928973909</td>
-                        <td>avelinopedro5@gmail.com</td>
-                        <td>Luanda</td>
-                        <td>Cacuaco</td>
-                        <td>Nova Urbanização</td>
-                        <td>22</td>
-                        <td>284.989,00</td>
+                      <tr 
+                        v-for="usuario in usuarios" :key="usuario.id">
+                        <td scope="row">{{usuario.nome}}</td>
+                        <td>{{usuario.numeroTelefone}}</td>
+                        <td>{{usuario.email}}</td>
+                        <td>{{usuario.provincia}}</td>
+                        <td>{{usuario.municipio}}</td>
+                        <td>{{usuario.bairro}}</td>
+                        <td>{{usuario.numCasa}}</td>
+                        <td>{{usuario.salario}}</td>
+                        
                         <td>
                           <div
                             class="btn-group btn-group-sm"
@@ -123,151 +101,189 @@
       </div>
     </main>
     <!-- and_main_calaboradores -->
-     
-     <!-- Start_modal -->
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Cadastrar colaborador</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-         <form
-                  action=""
-                  class="row g-3 was-validated needs-validation"
-                  novalidate
-                >
-                    <div class="col-lg-12">
-                      <div class="row">
-                        <div class="col-lg-6 mt-2">
-                           <input
-                          type="text"
-                          class="form-control py-1"
-                          aria-label="file example"
-                          required
-                        />
-                        <div class="invalid-feedback">
-                          Por favor insira o seu nome
-                        </div>
-                        </div>
-                        <div class="col-lg-6 mt-2">
-                           <input
-                          type="number"
-                          class="form-control py-1"
-                          aria-label="file example"
-                          required
-                        />
-                        <div class="invalid-feedback">Seu contacto</div>
-                        </div>
-                        <div class="col-lg-6 mt-2">
-                          <input
-                          type="email"
-                          class="form-control py-1"
-                          aria-label="file example"
-                          required
-                        />
-                        <div class="invalid-feedback">
-                          Por favor insira o seu email
-                        </div>
-                        </div>
-                        <div class="col-lg-6 mt-2">
-                          <input
-                          type="text"
-                          class="form-control py-1"
-                          aria-label="file example"
-                          required
-                        />
-                        <div class="invalid-feedback">Província</div>
-                        </div>
-                       
-                        <div class="col-lg-6 mt-2">
-                          <input
-                          type="text"
-                          class="form-control py-1"
-                          aria-label="file example"
-                          required
-                        />
-                        <div class="invalid-feedback">Município</div>
-                        </div>
-                        <div class="col-lg-6 mt-2">
-                           <input
-                          type="text"
-                          class="form-control py-1"
-                          aria-label="file example"
-                          required
-                        />
-                        <div class="invalid-feedback">Bairro</div>
-                        </div>
-                        <div class="col-lg-6 mt-2">
-                          <input
-                          type="text"
-                          class="form-control py-1"
-                          aria-label="file example"
-                          required
-                        />
-                        <div class="invalid-feedback">Número da casa</div>
-                        </div>
-                        <div class="col-lg-6 mt-2">
-                           <input
-                            type="number"
-                            class="form-control py-1"
-                            aria-label="file example"
-                            required
-                          />
-                          <div class="invalid-feedback">Salário</div>
-                        </div>
-                        <div class="col-lg-6 mt-2">
-                           <input
-                          type="password"
-                          class="form-control py-1"
-                          aria-label="file example"
-                          pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
-                          required
-                        />
-                        <div class="invalid-feedback">Criar senha</div>
-                        </div>
-                        <div class="col-lg-6 mt-2">
-                          <div class="mb-2">
-                        <input
-                          type="password"
-                          class="form-control py-1"
-                          aria-label="file example"
-                          required
-                        />
-                        <div class="invalid-feedback">Confirme a sua senha</div>
-                      </div>
-                        </div>
-                        
 
+    <!-- Start_modal -->
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="staticBackdrop"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">
+              Cadastrar colaborador
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form
+              action=""
+              class="row g-3 was-validated needs-validation"
+              novalidate
+            >
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="col-lg-6 mt-2">
+                    <input
+                      type="text"
+                      class="form-control py-1"
+                      aria-label="file example"
+                      required
+                    />
+                    <div class="invalid-feedback">
+                      Por favor insira o seu nome
                     </div>
                   </div>
-                </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-success py-1 mb-2 btn-sm">
-          <b-icon icon="hand-thumbs-up" scale="1"></b-icon> Salvar
-        </button>
+                  <div class="col-lg-6 mt-2">
+                    <input
+                      type="number"
+                      class="form-control py-1"
+                      aria-label="file example"
+                      required
+                    />
+                    <div class="invalid-feedback">Seu contacto</div>
+                  </div>
+                  <div class="col-lg-6 mt-2">
+                    <input
+                      type="email"
+                      class="form-control py-1"
+                      aria-label="file example"
+                      required
+                    />
+                    <div class="invalid-feedback">
+                      Por favor insira o seu email
+                    </div>
+                  </div>
+                  <div class="col-lg-6 mt-2">
+                    <input
+                      type="text"
+                      class="form-control py-1"
+                      aria-label="file example"
+                      required
+                    />
+                    <div class="invalid-feedback">Província</div>
+                  </div>
+
+                  <div class="col-lg-6 mt-2">
+                    <input
+                      type="text"
+                      class="form-control py-1"
+                      aria-label="file example"
+                      required
+                    />
+                    <div class="invalid-feedback">Município</div>
+                  </div>
+                  <div class="col-lg-6 mt-2">
+                    <input
+                      type="text"
+                      class="form-control py-1"
+                      aria-label="file example"
+                      required
+                    />
+                    <div class="invalid-feedback">Bairro</div>
+                  </div>
+                  <div class="col-lg-6 mt-2">
+                    <input
+                      type="text"
+                      class="form-control py-1"
+                      aria-label="file example"
+                      required
+                    />
+                    <div class="invalid-feedback">Número da casa</div>
+                  </div>
+                  <div class="col-lg-6 mt-2">
+                    <input
+                      type="number"
+                      class="form-control py-1"
+                      aria-label="file example"
+                      required
+                    />
+                    <div class="invalid-feedback">Salário</div>
+                  </div>
+                  <div class="col-lg-6 mt-2">
+                    <input
+                      type="password"
+                      class="form-control py-1"
+                      aria-label="file example"
+                      pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+                      required
+                    />
+                    <div class="invalid-feedback">Criar senha</div>
+                  </div>
+                  <div class="col-lg-6 mt-2">
+                    <div class="mb-2">
+                      <input
+                        type="password"
+                        class="form-control py-1"
+                        aria-label="file example"
+                        required
+                      />
+                      <div class="invalid-feedback">Confirme a sua senha</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-danger btn-sm"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button type="button" class="btn btn-success py-1 mb-2 btn-sm">
+              <b-icon icon="hand-thumbs-up" scale="1"></b-icon> Salvar
+            </button>
+          </div>
+        </div>
       </div>
     </div>
+    <!-- End_modal -->
   </div>
-</div>
-     <!-- End_modal -->
-    </div>
 </template>
 
 <script>
 export default {
-data(){
-    return{
-      name: "Colaboradores"
-    }
-},
-}
+  data() {
+    return {
+      usuario: {
+        id: null,
+        nome: '',
+        numeroTelefone: '',
+        email: '',
+        senha: '',
+        endereco:{
+          provincia: '',
+          municipio: '',
+          bairro: '',
+          numeroCara: ''
+        }
+      },
+      usuarios:[],
+    };
+  },
+  methods: {
+    listarUsuarios() {
+      this.axios("localhost:3000/usuarios").then((response) => {
+        console.log(response.data);
+      });
+    },
+  },
+};
 </script>
 
 <style>
-
 </style>

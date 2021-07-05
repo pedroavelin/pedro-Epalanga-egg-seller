@@ -10,7 +10,6 @@
               srcset=""
             />
           </div>
-
           <div class="col-md-6 col-lg-6 text-center py-5">
             <h1 class="text-uppercase">Entrar</h1>
               <h4 class="fw-bold py-2">Área administrativa</h4>
@@ -60,7 +59,7 @@ export default {
 
   methods: {
     login() {
-      debugger
+      // debugger
       this.$router.push('/encomendas');
     },
   },

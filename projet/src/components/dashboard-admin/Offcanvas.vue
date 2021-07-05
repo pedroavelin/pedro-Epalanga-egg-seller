@@ -94,6 +94,16 @@
                   Colaboradores
                 </a>
               </router-link>
+              <router-link tag="li" to="/usuarios">
+                <a href="#" class="list-group-item list-group-item-action">
+                  <b-icon
+                    icon="person"
+                    class="rounded p-0"
+                    variant="danger"
+                  ></b-icon>
+                  Clientes
+                </a>
+              </router-link>
             </div>
           </ul>
         </nav>

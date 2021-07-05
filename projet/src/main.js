@@ -6,12 +6,15 @@ import 'bootstrap/js/dist/modal'
 import 'bootstrap/js/dist/offcanvas'
 import 'animate.css/animate.min.css';
 
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
 import {IconsPlugin } from 'bootstrap-vue'
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 Vue.config.productionTip = false
+Vue.use(VueAxios,axios)
 
 Vue.use(IconsPlugin)
 new Vue({
