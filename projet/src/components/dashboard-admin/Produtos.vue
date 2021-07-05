@@ -152,19 +152,21 @@
                     <thead class="table-light text-center text-capitalize">
                       <tr>
                         <th scope="col">Descrição</th>
-                        <th scope="col">Preço</th>
+                        <th scope="col">Preço Unit</th>
                         <th scope="col">Quantidade</th>
-                        <th scope="col">Tipo</th>
+                        <th scope="col">Tamanho</th>
+                        <th scope="col">Data registro</th>
                         <th scope="col">opções</th>
                       </tr>
                     </thead>
                     <tbody class="text-center">
-                      <tr>
-                        <td>Caixa de Ovos</td>
-                        <td>30.000</td>
-                        <td>2</td>
-                        <td>M</td>
-
+                      <tr 
+                      v-for="produto in produtos" :key="produto.id">
+                        <td>{{produto.descricao}}</td>
+                        <td>{{produto.precoUnitario}}</td>
+                        <td>{{produto.quantidade}}</td>
+                        <td>{{produto.tamanho}}</td>
+                        <td>{{produto.dataRegistro}}</td>
                         <td>
                           <div
                             class="btn-group btn-group-sm"
@@ -197,7 +199,31 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      produto:{
+        id:null,
+        descricao: '',
+        precoUnitario: '',
+        quantidade: '',
+        tamanho: '',
+        dataRegistro: ''
+      },
+      produtos: []
+    }
+  },
+  methods: {
+    listarProdutos(){
+      this.axios.get('http://localhost:3000/produtos').then((response)=>{
+        this.produtos = response.data.data
+      })
+    }
+  },
+  created(){
+    this.listarProdutos()
+  }
+};
 </script>
 
 <style>

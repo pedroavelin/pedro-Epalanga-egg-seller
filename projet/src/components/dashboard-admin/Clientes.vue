@@ -108,8 +108,8 @@ export default {
   methods: {
     // listar clientes
     listarUsuarios() {
-      this.axios.get('localhost:3000/usuarios').then((response) => {
-      console.log(response);
+      this.axios.get('http://localhost:3000/clientes').then((response) => {
+      this.usuarios = response.data.data
       });
     }
   },

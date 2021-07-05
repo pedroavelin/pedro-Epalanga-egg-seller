@@ -59,17 +59,16 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr 
-                        v-for="usuario in usuarios" :key="usuario.id">
-                        <td scope="row">{{usuario.nome}}</td>
-                        <td>{{usuario.numeroTelefone}}</td>
-                        <td>{{usuario.email}}</td>
-                        <td>{{usuario.provincia}}</td>
-                        <td>{{usuario.municipio}}</td>
-                        <td>{{usuario.bairro}}</td>
-                        <td>{{usuario.numCasa}}</td>
-                        <td>{{usuario.salario}}</td>
-                        
+                      <tr v-for="colaborador in colaboradores" :key="colaborador.id">
+                        <td scope="row">{{ colaborador.nome }}</td>
+                        <td>{{ colaborador.numeroTelefone }}</td>
+                        <td>{{ colaborador.email }}</td>
+                        <td>{{ colaborador.provincia }}</td>
+                        <td>{{ colaborador.municipio }}</td>
+                        <td>{{ colaborador.bairro }}</td>
+                        <td>{{ colaborador.numeroCasa }}</td>
+                        <td>{{ colaborador.salario }}</td>
+
                         <td>
                           <div
                             class="btn-group btn-group-sm"
@@ -259,29 +258,30 @@
 export default {
   data() {
     return {
-      usuario: {
+      colaborador: {
         id: null,
         nome: '',
         numeroTelefone: '',
         email: '',
-        senha: '',
-        endereco:{
           provincia: '',
           municipio: '',
           bairro: '',
-          numeroCara: ''
-        }
+          numeroCasa: '',
+          salario: ''
       },
-      usuarios:[],
+      colaboradores:[],
     };
   },
   methods: {
-    listarUsuarios() {
-      this.axios("localhost:3000/usuarios").then((response) => {
-        console.log(response.data);
+    listarColaboradores() {
+      this.axios("http://localhost:3000/colaboradores").then((response) => {
+        this.colaboradores = response.data.data
       });
-    },
+    }
   },
+  created(){
+    this.listarColaboradores()
+  }
 };
 </script>
 

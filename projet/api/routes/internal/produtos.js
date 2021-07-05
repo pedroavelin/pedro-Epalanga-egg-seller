@@ -2,8 +2,8 @@ const router = require('express').Router()
 const db = require('../../db')
 
 router.get('/', (_, res) => {
-    // listar os "Clientes" que estão na BD
-    db.query('SELECT u.id, u.nome, u.numeroTelefone, u.email, u.dataCadastro, e.provincia, e.municipio, e.bairro, e.numeroCasa from clientes c join usuarios u on (c.usuarios_id= u.id) JOIN clientes_has_enderecos ce on (ce.clientes_id = c.id ) join enderecos e on (ce.enderecos_id = e.id) ', (error, results, _) => {
+    // listar os "Produtos" que estão na BD
+    db.query('SELECT p.id, p.descricao, p.precoUnitario, p.quantidade,t.tamanho, p.dataRegistro from produtos p join tamanhos t on (p.tamanhos_id = t.id)', (error, results, _) => {
         if (error) {
             throw error
         }
@@ -15,10 +15,10 @@ router.get('/', (_, res) => {
 })
 
 router.get('/:id', (req, res) =>{
-    // listar os "Clientes" que estão na BD por "id"
+    // listar os "colaboradores" que estão na BD por "id"
     const {id} = req.params
 
-    db.query('SELECT u.id, u.nome, u.numeroTelefone, u.email, u.dataCadastro, e.provincia, e.municipio, e.bairro, e.numeroCasa from clientes c join usuarios u on (c.usuarios_id= u.id) JOIN clientes_has_enderecos ce on (ce.clientes_id = c.id ) join enderecos e on (ce.enderecos_id = e.id) WHERE u.id  = ? LIMIT 1', [id], (error, results, _)=>{
+    db.query('SELECT u.id, u.nome, u.numeroTelefone, u.email, u.dataCadastro, c.salario, e.provincia, e.municipio, e.bairro, e.numeroCasa from usuarios u join colaboradores c on (c.usuarios_id = u.id) join enderecos e on (c.enderecos_id = e.id) WHERE u.id  = ? LIMIT 1', [id], (error, results, _)=>{
         if(error){
             throw error
         }

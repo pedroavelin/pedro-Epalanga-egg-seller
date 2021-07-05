@@ -17,9 +17,9 @@ const routes = [
     component: () => import('../components/dashboard-admin/Colaboradores.vue')
   },
   {
-    path: '/usuarios',
+    path: '/clientes',
     name: 'Lista de usuarios',
-    component: () => import('../components/dashboard-admin/usuarios.vue')
+    component: () => import('../components/dashboard-admin/Clientes.vue')
   },
   {
     path: '/despesas',
