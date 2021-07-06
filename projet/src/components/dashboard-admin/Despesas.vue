@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <!-- end_main_despesas -->
     <main class="mt-5 pt-5 phone">
       <div class="container-fluid">
@@ -125,23 +124,34 @@
                   <table class="table table-sm table caption-top table-hover">
                     <thead class="table-light text-center text-capitalize">
                       <tr>
-                        <th scope="col">despesa</th>
-                        <th scope="col">P. Unit</th>
-                        <th scope="col">Quantidade</th>
-                        <th scope="col">Total Pago</th>
-                        <th scope="col">Tipo pagamento</th>
                         <th scope="col">Descrição</th>
+                        <th scope="col">P. Unit</th>
+                        <th scope="col">Qnt.</th>
+                        <th scope="col">Observação</th>
+                        <th scope="col">Mod. Pag</th>
+                        <th scope="col">Endereço do banco</th>
+                        <th scope="col">total pago</th>
                         <th scope="col">opções</th>
                       </tr>
                     </thead>
                     <tbody class="text-center">
-                      <tr>
-                        <td>Ração</td>
-                        <td>24.500</td>
-                        <td>30</td>
-                        <td>735.000</td>
-                        <td>Banco</td>
-                        <td>Nenhum</td>
+                      <div
+                        v-if="!temDespesas"
+                        class="alert alert-danger p-0 m-auto"
+                        role="alert"
+                      >
+                        Lista de despesas vazia.
+                      </div>
+                      <tr v-for="despesa in listaDespesas" :key="despesa.id">
+                        <!-- <td>{{ index + 1 }}</td> -->
+                        <td>{{ despesa.descricaoDespesa }}</td>
+                        <td>{{ despesa.valorUnit }}</td>
+                        <td>{{ despesa.quantidade }}</td>
+                        <td>{{ despesa.observacao }}</td>
+                        <td>{{ despesa.modPagamento }}</td>
+                        <td>{{ despesa.enderecoBancario }}</td>
+                        <td>{{ despesa.totalPago }}</td>
+
                         <td>
                           <div
                             class="btn-group btn-group-sm"
@@ -170,21 +180,42 @@
       </div>
     </main>
     <!-- end_main_despesas -->
-
   </div>
 </template>
 <script>
-
 export default {
-  data(){
-    return{
-      name: "Despesas"
+  data() {
+    return {
+      despesa: {
+        id: null,
+        descricaoDespesa: '',
+        valorUnit: '',
+        quantidade: '',
+        observacao: '',
+        modPagamento:'',
+        enderecoBancario: '',
+        totalPago: '',
+      },
+      listaDespesas: [],
     };
   },
+  methods: {
+    listarDespesas() {
+      this.axios.get("http://localhost:3000/despesas").then((response) => {
+        this.listaDespesas = response.data.data;
+      });
+    },
+  },
+  created() {
+    this.listarDespesas();
+  },
+  computed: {
+    temDespesas() {
+      return this.listaDespesas.length > 0;
+    },
+  },
 };
-
 </script>
 
 <style>
-
 </style>
