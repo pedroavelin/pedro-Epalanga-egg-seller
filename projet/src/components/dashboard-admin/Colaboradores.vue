@@ -103,7 +103,7 @@
       </div>
     </main>
     <!-- and_main_calaboradores -->
-
+    
     <!-- Start_modal -->
     <!-- Modal -->
     <div
@@ -223,16 +223,16 @@
                   </div>
                   <div class="col-lg-6 mt-2">
                     <input
+                      v-model="colaborador.senha"
                       type="password"
                       class="form-control py-1"
                       aria-label="file example"
-                      pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
                       required
                     />
                     <div class="invalid-feedback">Criar senha</div>
                   </div>
                   <div class="col-lg-6 mt-2">
-                    <div class="mb-2">
+                    <!-- <div class="mb-2">
                       <input
                         type="password"
                         class="form-control py-1"
@@ -240,7 +240,7 @@
                         required
                       />
                       <div class="invalid-feedback">Confirme a sua senha</div>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </div>
@@ -255,8 +255,10 @@
               Cancelar
             </button>
             <button
-            @click="cadastrarColaborador()"
-             type="button" class="btn btn-success py-1 mb-2 btn-sm">
+              @click="cadastrarColaborador()"
+              type="button"
+              class="btn btn-success py-1 mb-2 btn-sm"
+            >
               <b-icon icon="hand-thumbs-up" scale="1"></b-icon> Salvar
             </button>
           </div>
@@ -268,19 +270,20 @@
 </template>
 
 <script>
+import colaboradores from '../../../api/routes/internal/colaboradores'
 export default {
   data() {
     return {
       colaborador: {
-        id: null,
-        nome: "",
-        numeroTelefone: "",
-        email: "",
-        provincia: "",
-        municipio: "",
-        bairro: "",
-        numeroCasa: "",
-        salario: "",
+        nome: '',
+        numeroTelefone: '',
+        email: '',
+        senha: '',
+        provincia: '',
+        municipio: '',
+        bairro: '',
+        numeroCasa: '',
+        salario: '',
       },
       colaboradores: [],
     };
@@ -291,25 +294,21 @@ export default {
         this.colaboradores = response.data.data;
       });
     },
-    cadastrarColaborador(){
-      if(this.colaboradores.length < 0){
-        console.log('Insira os seus dados');
-      }else{
-        this.colaboradores.push({})
+    cadastrarColaborador() {
+      try {
+        colaboradores.post(this.colaborador)
+        this.$router.push({
+          name: 'colaboradores'
+        })
+      } catch (error) {
+
+        console.log(error);
+        
       }
-    }
+      }
   },
   created() {
-    this.listarColaboradores({
-      nome: this.colaboradores.nome,
-      numeroTelefone: this.colaboradores.numeroTelefone,
-      email: this.colaboradores.email,
-      provincia: this.colaboradores.provincia,
-      municipio: this.colaboradores.municipio,
-      bairro: this.colaboradores.bairro,
-      numeroCasa: this.colaboradores.numeroCasa,
-      salario: this.colaboradores.salario,
-    });
+    this.listarColaboradores();
   },
 };
 </script>
