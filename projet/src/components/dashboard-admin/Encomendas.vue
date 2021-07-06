@@ -34,28 +34,36 @@
                     <thead class="table-light text-center text-capitalize">
                       <tr>
                         <th scope="col">Cliente</th>
-                        <th scope="col">Produto</th>
                         <th scope="col">Descrição</th>
                         <th scope="col">P. Unit</th>
                         <th scope="col">Quantidade</th>
+                        <th scope="col">Tamanho</th>
                         <th scope="col">Total</th>
-                        <th scope="col">Contacto</th>
-                        <th scope="col">Data</th>
                         <th scope="col">Estado</th>
+                        <th scope="col">Contacto</th>
+                        <th scope="col">Data Encomenda</th>
                         <th scope="col">opções</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr class="text-center">
-                        <td scope="row">Vanilson Domingos</td>
-                        <td>Ovo</td>
-                        <td>Caixa</td>
-                        <td>29.500</td>
-                        <td>2</td>
-                        <td>59.000</td>
-                        <td>942745420</td>
-                        <td>24-06-21</td>
-                        <td>Pendente</td>
+                    <tbody class="text-center">
+                       <div
+                        v-if="!temEncomendas"
+                        class="alert alert-danger p-0 m-auto"
+                        role="alert"
+                      >
+                        Sua lista de encomendas encontra-se vazia.
+                      </div>
+                      <tr
+                      v-for="encomenda in listaEncomendas" :key="encomenda.id" >
+                        <td scope="row">{{encomenda.Descrição}}</td>
+                        <td>{{encomenda.Descrição}}</td>
+                        <td>{{encomenda.precoUnitario}}</td>
+                        <td>{{encomenda.quantidade}}</td>
+                        <td>{{encomenda.tamanho}}</td>
+                        <td>{{encomenda.totalPago}}</td>
+                        <td>{{encomenda.estado}}</td>
+                        <td>{{encomenda.numeroTelefone}}</td>
+                        <td>{{encomenda.dataEncomenda}}</td>
                         <td>
                           <div
                             class="btn-group btn-group-sm"
@@ -218,7 +226,39 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      encomenda: {
+        nome: '',
+        descricao: '',
+        precoUnitario: '',
+        quantidade: '',
+        tamanho: '',
+        totalPago: '',
+        estado: '',
+        numeroTelefone: '',
+        dataEncomenda: ''
+      },
+      listaEncomendas: [],
+    };
+  },
+ methods: {
+    listarEncomendas() {
+    this.axios.get("http://localhost:300/encomendas").then((response) => {
+      this.listarEncomendas = response.data.data;
+    });
+  },
+ },
+  created() {
+    this.listarEncomendas();
+  },
+  computed: {
+    temEncomendas() {
+      return this.listaEncomendas.length > 0;
+    },
+  },
+};
 </script>
 
 <style>

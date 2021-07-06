@@ -3,7 +3,7 @@ const db = require('../../db')
 
 router.get('/', (_, res) => {
     // listar os "Produtos" que estão na BD
-    db.query('SELECT p.id, p.descricao, p.precoUnitario, p.quantidade,t.tamanho, p.dataRegistro from produtos p join tamanhos t on (p.tamanhos_id = t.id)', (error, results, _) => {
+    db.query('SELECT p.id, p.descricao, p.precoUnitario, p.quantidade, t.tamanho, p.dataRegistro from produtos p join tamanhos t on (p.tamanhos_id = t.id)', (error, results, _) => {
         if (error) {
             throw error
         }

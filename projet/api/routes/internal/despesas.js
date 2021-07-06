@@ -2,7 +2,7 @@ const router = require('express').Router()
 const db = require('../../db')
 
 router.get('/', (_, res) => {
-    // listar os "Produtos" que estão na BD
+    // listar os "Despesas" que estão na BD
     db.query('SELECT d.id, td.descricaoDespesa, tp.modPagamento, d.valorUnit, d.quantidade, d.observacao, tp.enderecoBancario, p.totalPago from tipoDespesas td join despesas d on (d.tipoDespesas_id = td.id) join tipopagamentos tp on(d.tipoPagamentos_id = tp.id) join pagamentos_has_tipopagamentos pt on(pt.tipoPagamentos_id = tp.id) join pagamentos p on(pt.pagamentos_id = p.id)', (error, results, _) => {
         if (error) {
             throw error
@@ -15,10 +15,10 @@ router.get('/', (_, res) => {
 })
 
 router.get('/:id', (req, res) =>{
-    // listar os "colaboradores" que estão na BD por "id"
+    // listar os "Despesas" que estão na BD por "id"
     const {id} = req.params
 
-    db.query('SELECT u.id, u.nome, u.numeroTelefone, u.email, u.dataCadastro, c.salario, e.provincia, e.municipio, e.bairro, e.numeroCasa from usuarios u join colaboradores c on (c.usuarios_id = u.id) join enderecos e on (c.enderecos_id = e.id) WHERE u.id  = ? LIMIT 1', [id], (error, results, _)=>{
+    db.query('SELECT d.id, td.descricaoDespesa, tp.modPagamento, d.valorUnit, d.quantidade, d.observacao, tp.enderecoBancario, p.totalPago from tipoDespesas td join despesas d on (d.tipoDespesas_id = td.id) join tipopagamentos tp on(d.tipoPagamentos_id = tp.id) join pagamentos_has_tipopagamentos pt on(pt.tipoPagamentos_id = tp.id) join pagamentos p on(pt.pagamentos_id = p.id) WHERE d.id  = ? LIMIT 1', [id], (error, results, _)=>{
         if(error){
             throw error
         }
@@ -26,10 +26,10 @@ router.get('/:id', (req, res) =>{
     })
 })
 
-// Inserindo um novo usuário 
+// Inserindo um novo Despesas 
 router.post('/', (req, res)=>{
     const usuario = req.body
-    db.query('INSERT INTO usuarios SET ?',[usuario], (error, results, _)=>{
+    db.query('INSERT INTO despesas SET ?',[usuario], (error, results, _)=>{
         if(error){
             throw error
         }
