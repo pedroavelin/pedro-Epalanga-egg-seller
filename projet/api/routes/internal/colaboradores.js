@@ -26,10 +26,10 @@ router.get('/:id', (req, res) =>{
     })
 })
 
-// Inserindo um novo usuário 
+// Cadastrando um novo colaborador 
 router.post('/', (req, res)=>{
-    const usuario = req.body
-    db.query('INSERT INTO usuarios SET ?',[usuario], (error, results, _)=>{
+    const colaborador = req.body
+    db.query('INSERT INTO colaboradores SET ?',[colaborador], (error, results, _)=>{
         if(error){
             throw error
         }

@@ -59,7 +59,10 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="colaborador in colaboradores" :key="colaborador.id">
+                      <tr
+                        v-for="colaborador in colaboradores"
+                        :key="colaborador.id"
+                      >
                         <td scope="row">{{ colaborador.nome }}</td>
                         <td>{{ colaborador.numeroTelefone }}</td>
                         <td>{{ colaborador.email }}</td>
@@ -135,6 +138,7 @@
                 <div class="row">
                   <div class="col-lg-6 mt-2">
                     <input
+                      v-model="colaborador.nome"
                       type="text"
                       class="form-control py-1"
                       aria-label="file example"
@@ -146,6 +150,7 @@
                   </div>
                   <div class="col-lg-6 mt-2">
                     <input
+                      v-model="colaborador.numeroTelefone"
                       type="number"
                       class="form-control py-1"
                       aria-label="file example"
@@ -155,6 +160,7 @@
                   </div>
                   <div class="col-lg-6 mt-2">
                     <input
+                      v-model="colaborador.email"
                       type="email"
                       class="form-control py-1"
                       aria-label="file example"
@@ -166,6 +172,7 @@
                   </div>
                   <div class="col-lg-6 mt-2">
                     <input
+                      v-model="colaborador.provincia"
                       type="text"
                       class="form-control py-1"
                       aria-label="file example"
@@ -176,6 +183,7 @@
 
                   <div class="col-lg-6 mt-2">
                     <input
+                      v-model="colaborador.municipio"
                       type="text"
                       class="form-control py-1"
                       aria-label="file example"
@@ -185,6 +193,7 @@
                   </div>
                   <div class="col-lg-6 mt-2">
                     <input
+                      v-model="colaborador.bairro"
                       type="text"
                       class="form-control py-1"
                       aria-label="file example"
@@ -194,6 +203,7 @@
                   </div>
                   <div class="col-lg-6 mt-2">
                     <input
+                      v-model="colaborador.numeroCasa"
                       type="text"
                       class="form-control py-1"
                       aria-label="file example"
@@ -203,6 +213,7 @@
                   </div>
                   <div class="col-lg-6 mt-2">
                     <input
+                      v-model="colaborador.salario"
                       type="number"
                       class="form-control py-1"
                       aria-label="file example"
@@ -243,7 +254,9 @@
             >
               Cancelar
             </button>
-            <button type="button" class="btn btn-success py-1 mb-2 btn-sm">
+            <button
+            @click="cadastrarColaborador()"
+             type="button" class="btn btn-success py-1 mb-2 btn-sm">
               <b-icon icon="hand-thumbs-up" scale="1"></b-icon> Salvar
             </button>
           </div>
@@ -260,30 +273,45 @@ export default {
     return {
       colaborador: {
         id: null,
-        nome: '',
-        numeroTelefone: '',
-        email: '',
-          provincia: '',
-          municipio: '',
-          bairro: '',
-          numeroCasa: '',
-          salario: ''
+        nome: "",
+        numeroTelefone: "",
+        email: "",
+        provincia: "",
+        municipio: "",
+        bairro: "",
+        numeroCasa: "",
+        salario: "",
       },
-      colaboradores:[],
+      colaboradores: [],
     };
   },
   methods: {
     listarColaboradores() {
       this.axios("http://localhost:3000/colaboradores").then((response) => {
-        this.colaboradores = response.data.data
+        this.colaboradores = response.data.data;
       });
+    },
+    cadastrarColaborador(){
+      if(this.colaboradores.length < 0){
+        console.log('Insira os seus dados');
+      }else{
+        this.colaboradores.push({})
+      }
     }
   },
-  created(){
-    this.listarColaboradores()
-  }
+  created() {
+    this.listarColaboradores({
+      nome: this.colaboradores.nome,
+      numeroTelefone: this.colaboradores.numeroTelefone,
+      email: this.colaboradores.email,
+      provincia: this.colaboradores.provincia,
+      municipio: this.colaboradores.municipio,
+      bairro: this.colaboradores.bairro,
+      numeroCasa: this.colaboradores.numeroCasa,
+      salario: this.colaboradores.salario,
+    });
+  },
 };
 </script>
-
 <style>
 </style>
