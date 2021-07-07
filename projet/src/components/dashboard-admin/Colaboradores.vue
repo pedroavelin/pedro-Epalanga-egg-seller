@@ -103,7 +103,7 @@
       </div>
     </main>
     <!-- and_main_calaboradores -->
-    
+
     <!-- Start_modal -->
     <!-- Modal -->
     <div
@@ -224,8 +224,8 @@
                   <div class="col-lg-6 mt-2">
                     <input
                       v-model="colaborador.senha"
-                      type="password"
-                      class="form-control py-1"
+                      type="current-password"
+                      class="form-control  py-1"
                       aria-label="file example"
                       required
                     />
@@ -270,7 +270,6 @@
 </template>
 
 <script>
-import colaboradores from '../../../api/routes/internal/colaboradores'
 export default {
   data() {
     return {
@@ -292,20 +291,44 @@ export default {
     listarColaboradores() {
       this.axios("http://localhost:3000/colaboradores").then((response) => {
         this.colaboradores = response.data.data;
+        // console.log(response);
       });
     },
     cadastrarColaborador() {
-      try {
-        colaboradores.post(this.colaborador)
-        this.$router.push({
-          name: 'colaboradores'
-        })
-      } catch (error) {
-
-        console.log(error);
-        
-      }
-      }
+      let newColaboradores = {
+        nome: this.colaborador.nome,
+        numeroTelefone: this.colaborador.numeroTelefone,
+        email: this.colaborador.email,
+        provincia: this.colaborador.provincia,
+        municipio: this.colaborador.municipio,
+        bairro: this.colaborador.bairro,
+        numeroCasa: this.colaborador.numeroCasa,
+        salario: this.colaborador.salario,
+        senha: this.colaborador.senha,
+      };
+      this.axios.post("http://localhost:3000/colaboradores", newColaboradores).then((response) => {
+          if (response.data.data.code === 200) {
+            // this.listarColaboradores()
+            alert("Usuário cadastrado com sucesso !!");
+            this.limparInputCxol();
+          } else {
+            alert("Erro ao cadastradar Usuário");
+          }
+        });
+    },
+    limparInputCxol() {
+      this.colaborador = {
+        nome: '',
+        numeroTelefone: '',
+        email: '',
+        provincia: '',
+        municipio: '',
+        bairro: '',
+        numeroCasa: '',
+        salario: '',
+        senha: '',
+      };
+    },
   },
   created() {
     this.listarColaboradores();
