@@ -291,9 +291,9 @@ export default {
     listarColaboradores() {
       this.axios("http://localhost:3000/colaboradores").then((response) => {
         this.colaboradores = response.data.data;
-        // console.log(response);
       });
     },
+    
     cadastrarColaborador() {
       let newColaboradores = {
         nome: this.colaborador.nome,
@@ -307,16 +307,16 @@ export default {
         senha: this.colaborador.senha,
       };
       this.axios.post("http://localhost:3000/colaboradores", newColaboradores).then((response) => {
-          if (response.data.data.code === 200) {
-            // this.listarColaboradores()
+        if (response.data.code === 200) {
+          // this.listarColaboradores()
             alert("Usuário cadastrado com sucesso !!");
-            this.limparInputCxol();
+            this.limparInputCol();
           } else {
             alert("Erro ao cadastradar Usuário");
           }
         });
     },
-    limparInputCxol() {
+    limparInputCol() {
       this.colaborador = {
         nome: '',
         numeroTelefone: '',

@@ -91,16 +91,17 @@
 export default {
   data() {
     return {
+      // obs: usuario === cliente
       usuario: {
         id: null,
-        nome: "",
-        numeroTelefone: "",
-        email: "",
-        senha: "",
-        provincia: "",
-        municipio: "",
-        bairro: "",
-        numeroCasa: "",
+        nome: '',
+        numeroTelefone: '',
+        email:'',
+        senha: '',
+        provincia: '',
+        municipio: '',
+        bairro: '',
+        numeroCasa: '',
       },
       usuarios: [],
     };
