@@ -50,7 +50,7 @@
                   required
                 />
               </div>
-              <div class="col-lg-6">
+              <div class="col-lg-12">
                 <input
                 v-model="cliente.email"
                   type="email"
@@ -62,14 +62,28 @@
               </div>
 
               <div class="col-lg-6">
-                <input
+                <select
+                  v-model="enderecos.id"
+                 class="form-select mt-3" 
+                 aria-label="Default select example">
+                  <option selected disabled>Provincia</option>
+                  <option
+                    v-for="clientes in enderecos" :key="clientes.id"
+                    value="endereco.id"
+                    selected
+                  >
+                  {{enderecos.provincia}}
+                  </option>
+                  
+                </select>
+                <!-- <input
                 v-model="cliente.provincia"
                   type="text"
                   class="form-control input-field"
                   id="provincia"
                   placeholder="Provincia"
                   required
-                />
+                /> -->
               </div>
               <div class="col-lg-6">
                 <input
@@ -103,7 +117,7 @@
               </div>
               <div class="col-lg-6">
                 <input
-                v-model="cliente.senha"
+                  v-model="cliente.senha"
                   type="password"
                   class="form-control input-field"
                   id="password"
@@ -122,7 +136,7 @@
               </div> -->
             </div>
 
-            <div class="container pt-5">
+            <div class="container pt-2">
               <button 
               @click="cadastrarCliente()"
               type="submit" class="submit-btn btn btn-success mt-2">
@@ -575,7 +589,7 @@ export default {
         numeroCasa: "",
         senha: "",
       },
-      clientes: [],
+      enderecos:[]
     };
   },
   components: {
@@ -583,6 +597,12 @@ export default {
     Footer,
   },
   methods: {
+    listarprovincias(){
+      this.axios.get("http://localhost:3000/clientes/provincias").then((response)=>{
+        this.enderecos = response.data.data
+        console.log(response);
+      })
+    },
     cadastrarCliente() {
       let newCliente = {
         nome: this.cliente.nome,
@@ -597,7 +617,7 @@ export default {
       this.axios
         .post("http://localhost:3000/clientes", newCliente)
         .then((response) => {
-          if (response.data.data === 200) {
+          if (response.data.data.code === 200) {
             console.log("Usuário cadastrado com sucess !!!");
           } else {
             console.log("Erro ao cadastrar usuário.");
@@ -614,6 +634,9 @@ export default {
       document.getElementById("registar").style.left = "450px";
       document.getElementById("btn").style.left = "0";
     },
+  },
+  created() {
+    this.listarprovincias()
   },
 };
 </script>

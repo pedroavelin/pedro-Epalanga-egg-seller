@@ -3,7 +3,20 @@ const db = require('../../db')
 
 router.get('/', (_, res) => {
 	// listar os "Clientes" que estão na BD
-	db.query('SELECT u.id, u.nome, u.numeroTelefone, u.email, u.dataCadastro, e.provincia, e.municipio, e.bairro, e.numeroCasa from clientes c join usuarios u on (c.usuarios_id= u.id) JOIN clientes_has_enderecos ce on (ce.clientes_id = c.id ) join enderecos e on (ce.enderecos_id = e.id) order by u.nome', (error, results, _) => {
+	db.query('SELECT u.id, u.nome, u.numeroTelefone, u.email, u.dataCadastro, e.provincia, e.municipio, e.bairro, e.numeroCasa from clientes c join usuarios u on (c.usuarios_id= u.id) JOIN clientes_has_enderecos ce on (ce.clientes_id = c.id ) join enderecos e on (ce.enderecos_id = e.id) order by u.nome LIMIT 8', (error, results, _) => {
+		if (error) {
+			throw error
+		}
+		res.send({
+			data: results
+		},
+		);
+	})
+})
+
+router.get('/provincias', (_, res) => {
+	// listar as "provincias" que estão na BD
+	db.query('select provincia from enderecos', (error, results, _) => {
 		if (error) {
 			throw error
 		}

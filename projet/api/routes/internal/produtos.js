@@ -18,7 +18,7 @@ router.get('/:id', (req, res) =>{
     // listar os "colaboradores" que estão na BD por "id"
     const {id} = req.params
 
-    db.query('SELECT u.id, u.nome, u.numeroTelefone, u.email, u.dataCadastro, c.salario, e.provincia, e.municipio, e.bairro, e.numeroCasa from usuarios u join colaboradores c on (c.usuarios_id = u.id) join enderecos e on (c.enderecos_id = e.id) WHERE u.id  = ? LIMIT 1', [id], (error, results, _)=>{
+    db.query('SELECT p.id, p.descricao, p.precoUnitario, p.quantidade, t.tamanho, p.dataRegistro from produtos p join tamanhos t on (p.tamanhos_id = t.id) WHERE p.id  = ?', [id], (error, results, _)=>{
         if(error){
             throw error
         }
@@ -28,8 +28,8 @@ router.get('/:id', (req, res) =>{
 
 // Inserindo um novo usuário 
 router.post('/', (req, res)=>{
-    const usuario = req.body
-    db.query('INSERT INTO usuarios SET ?',[usuario], (error, results, _)=>{
+    const tamanho = req.body 
+    db.query('INSERT INTO tamanhos SET ?',[tamanho], (error, results, _)=>{
         if(error){
             throw error
         }
