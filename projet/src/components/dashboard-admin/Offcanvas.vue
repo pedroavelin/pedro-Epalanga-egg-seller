@@ -42,28 +42,29 @@
             </li>
             <div class="list-group px-2">
               <span class="text-muted p-2">Menu</span>
-              <router-link class="p" tag="li" to="/encomendas">
+              <router-link class="v-link" to="/encomendas">
                 <a
                   href="#"
-                  class="
-                    list-group-item list-group-item-action
-                    bg-danger
-                    border-0
-                  "
+                  class="list-group-item list-group-item-action border-0 active"
                   aria-current="true"
+                  id="l1"
+                  @click="mudarCor('l1')"
                 >
                   <b-icon
                     icon="cart-check-fill"
-                    class="rounded p-0 "
-                    variant="white"
-                    
+                    class="rounded p-0"
+                    variant="danger"
                   ></b-icon>
                   Encomendas
                 </a>
               </router-link>
 
-              <router-link class="v-link-active" to="/produtos">
-                <a class="list-group-item list-group-item-action">
+              <router-link class="v-link" to="/produtos">
+                <a
+                  class="list-group-item list-group-item-action"
+                  id="l2"
+                  @click="mudarCor('l2')"
+                >
                   <b-icon
                     icon="archive"
                     class="rounded p-0"
@@ -74,7 +75,12 @@
               </router-link>
 
               <router-link tag="li" to="/despesas">
-                <a href="#" class="list-group-item list-group-item-action">
+                <a
+                  href="#"
+                  class="list-group-item list-group-item-action"
+                  id="l3"
+                  @click="mudarCor('l3')"
+                >
                   <b-icon
                     icon="trash"
                     class="rounded p-0"
@@ -85,7 +91,12 @@
               </router-link>
 
               <router-link tag="li" to="/colaboradores">
-                <a href="#" class="list-group-item list-group-item-action">
+                <a
+                  href="#"
+                  class="list-group-item list-group-item-action"
+                  id="l4"
+                  @click="mudarCor('l4')"
+                >
                   <b-icon
                     icon="person"
                     class="rounded p-0"
@@ -95,7 +106,12 @@
                 </a>
               </router-link>
               <router-link tag="li" to="/clientes">
-                <a href="#" class="list-group-item list-group-item-action">
+                <a
+                  href="#"
+                  class="list-group-item list-group-item-action"
+                  id="l5"
+                  @click="mudarCor('l5')"
+                >
                   <b-icon
                     icon="person"
                     class="rounded p-0"
@@ -114,12 +130,24 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      name: "OffCanvas",
+    };
+  },
+  methods: {
+    mudarCor(id) {
+      // classList: Permite a manipulação do atributo de conteúdo da classe do elemento como um conjunto de tokens separados por espaço em branco por meio de um objeto DOMTokenList.
+      document.getElementsByClassName("active")[0].classList.remove("active");
+      document.getElementById(id).classList.add("active");
+    },
+  },
+};
 </script>
 
 <style>
-a:link,
-a:visited {
+a:link {
   text-decoration: none;
 }
 a:hover {
