@@ -26,14 +26,29 @@ router.get('/:id', (req, res) =>{
     })
 })
 
-// Inserindo um novo usuário 
+// registar um novo Produto 
 router.post('/', (req, res)=>{
-    const tamanho = req.body 
+    const tamanho = {
+        tamanho: req.body.tamanho
+    } 
     db.query('INSERT INTO tamanhos SET ?',[tamanho], (error, results, _)=>{
         if(error){
             throw error
         }
-        res.send(results[0])
+
+        const produto = {
+            descricao: req.body.descricao,
+            precoUnitario: req.body.precoUnitario,
+            quantidade: req.body.quantidade,
+            tamanhos_id: results.insertId
+        }
+        db.query('INSERT INTO produtos SET ?',[produto], (error, results, _)=>{
+            if(error){
+                throw error
+            }
+
+            res.send(results[0])
+        })
     });
 })
 
