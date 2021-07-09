@@ -308,7 +308,6 @@ export default {
       };
       this.axios.post("http://localhost:3000/colaboradores", newColaboradores).then((response) => {
         if (response.data.code === 200) {
-          // this.listarColaboradores()
             alert("Usuário cadastrado com sucesso !!");
             this.limparInputCol();
           } else {

@@ -52,6 +52,7 @@
                         Cadastrar Produto
                       </h5>
                       <button
+                      @click="limparInputs()"
                         type="button"
                         class="btn-close"
                         data-bs-dismiss="modal"
@@ -68,6 +69,7 @@
                           <div class="col-lg-6">
                             <div class="mb-2">
                               <input
+                                v-model="produto.descricao"
                                 type="text"
                                 class="form-control py-1"
                                 aria-label="file example"
@@ -80,6 +82,7 @@
                           <div class="col-lg-6">
                             <div class="mb-2">
                               <input
+                                v-model="produto.precoUnitario"
                                 type="number"
                                 class="form-control py-1"
                                 aria-label="file example"
@@ -91,6 +94,7 @@
                           <div class="col-lg-6">
                             <div class="mb-2">
                               <input
+                                v-model="produto.quantidade"
                                 type="text"
                                 class="form-control py-1"
                                 aria-label="file example"
@@ -103,8 +107,19 @@
 
                           <div class="col-lg-6">
                             <div class="mb-2">
+                              <input
+                                v-model="produto.tamanho"
+                                type="text"
+                                class="form-control py-1"
+                                aria-label="file example"
+                                value=""
+                                required
+                              />
+                              <div class="invalid-feedback">Tamanho</div>
+                            </div>
+                            <!-- <div class="mb-2">
                               <select
-                                class="form-select py-1"
+                                class="form-select p  y-1"
                                 required
                                 aria-label="select example"
                               >
@@ -113,13 +128,14 @@
                                 <option value="2">G</option>
                               </select>
                               <div class="invalid-feedback">Tipo</div>
-                            </div>
+                            </div> -->
                           </div>
                         </div>
                       </form>
                     </div>
                     <div class="modal-footer">
                       <button
+                      @click="limparInputs()"
                         type="button"
                         class="btn btn-danger btn-sm"
                         data-bs-dismiss="modal"
@@ -127,17 +143,28 @@
                         Cancelar
                       </button>
                       <button
+                        v-if="!produto.id"
+                        @click="cadastrarProd()"
                         type="button"
                         class="btn btn-success py-1 mb-2 btn-sm"
                       >
                         <b-icon icon="hand-thumbs-up" scale="1"></b-icon> Salvar
+                      </button>
+                      <!-- editProduto => guarda as alerações da edição -->
+                      <button
+                        v-else
+                        @click="editProduto(produto)" 
+                        type="button"
+                        class="btn btn-success py-1 mb-2 btn-sm"
+                      >
+                        <b-icon icon="hand-thumbs-up" scale="1"></b-icon> Editar
+                        produto
                       </button>
                     </div>
                   </div>
                 </div>
               </div>
               <!-- ==================================================================================================================== -->
-
               <div class="container mt-3">
                 <hr />
                 <div
@@ -160,13 +187,12 @@
                       </tr>
                     </thead>
                     <tbody class="text-center">
-                      <tr 
-                      v-for="produto in produtos" :key="produto.id">
-                        <td>{{produto.descricao}}</td>
-                        <td>{{produto.precoUnitario}}</td>
-                        <td>{{produto.quantidade}}</td>
-                        <td>{{produto.tamanho}}</td>
-                        <td>{{produto.dataRegistro}}</td>
+                      <tr v-for="produto in produtos" :key="produto.id">
+                        <td>{{ produto.descricao }}</td>
+                        <td>{{ produto.precoUnitario }}</td>
+                        <td>{{ produto.quantidade }}</td>
+                        <td>{{ produto.tamanho }}</td>
+                        <td>{{ produto.dataRegistro }}</td>
                         <td>
                           <div
                             class="btn-group btn-group-sm"
@@ -174,12 +200,19 @@
                             aria-label="Basic mixed styles example"
                           >
                             <button
+                            @click="openEditarModalProd(produto)"
                               type="button"
-                              class="btn text-white bg-info"
+                              class="btn text-whiter bg-info"
+                              data-bs-toggle="modal"
+                              data-bs-target="#staticBackdrop"
                             >
                               <b-icon icon="pencil-fill" scale="1"></b-icon>
                             </button>
-                            <button type="button" class="btn btn-danger">
+                            <button
+                              @click="eliminarProduto(produto.id)"
+                              type="button"
+                              class="btn btn-danger"
+                            >
                               <b-icon icon="trash" scale="1"></b-icon>
                             </button>
                           </div>
@@ -202,27 +235,111 @@
 export default {
   data() {
     return {
-      produto:{
-        id:null,
-        descricao: '',
-        precoUnitario: '',
-        quantidade: '',
-        tamanho: '',
-        dataRegistro: ''
+      modalIsOpen: false,
+      produto: {
+        id: null,
+        descricao: "",
+        precoUnitario: "",
+        quantidade: "",
+        tamanho: "",
       },
-      produtos: []
-    }
+      produtos: [],
+    };
   },
   methods: {
-    listarProdutos(){
-      this.axios.get('http://localhost:3000/produtos').then((response)=>{
-        this.produtos = response.data.data
-      })
+    atualizarProduto() {
+      this.axios.put("http://localhost:3000/produtos").then((response) => {
+        console.log(response);
+      });
+    },
+    // Obs: Não está funcionando corretamente
+    eliminarProduto(id) {
+      this.axios
+        .delete(`http://localhost:3000/produtos` + id)
+        .then((response) => {
+          // if (response.data.code === ) {
+          //   this.$swal("Sucesso!", "Produto eliminado com sucesso", "error");
+          //   this.listarProdutos()
+          // }else{
+          //   this.$swal("Erro!", "Produto não eliminado", "error");
+          // }
+          console.log(response);
+        });
+    },
+    cadastrarProd() {
+      if (this.produto === "") {
+        this.$swal("Por favor!", "Preencha o formulário", "error");
+        return;
+      }
+      let newProduto = {
+        descricao: this.produto.descricao,
+        precoUnitario: this.produto.precoUnitario,
+        quantidade: this.produto.quantidade,
+        tamanho: this.produto.tamanho,
+      };
+
+      this.axios
+        .post("http://localhost:3000/produtos", newProduto)
+        .then((response) => {
+          if (response.data.Status !== "success") {
+            this.listarProdutos();
+            this.limparInputs();
+            this.$swal("Parabéns!", "Sucesso ao cadastrar", "success");
+          } else {
+            this.$swal("Good job!", "Erro ao cadastrar", "error");
+          }
+        });
+    },
+    editProduto() {
+      let newProduto = {
+        descricao: this.produto.descricao,
+        precoUnitario: this.produto.precoUnitario,
+        quantidade: this.produto.quantidade,
+        tamanho: this.produto.tamanho,
+      };
+
+      this.axios
+        .put("http://localhost:3000/produtos" + this.produtos.id, newProduto)
+        .then((response) => {
+          if (response.data.Status !== "success") {
+            this.listarProdutos();
+            this.limparInputs();
+            this.$swal("Parabéns!", "Sucesso ao editar", "success");
+          } else {
+            this.$swal("Erro!", "Erro ao editar", "error");
+          }
+        });
+    },
+
+    listarProdutos() {
+      this.axios.get("http://localhost:3000/produtos").then((response) => {
+        this.produtos = response.data.data;
+      });
+    },
+    limparInputs() {
+      this.produto = {
+        descricao: "",
+        precoUnitario: "",
+        quantidade: "",
+        tamanho: "",
+      };
+    },
+    openEditarModalProd(produto){
+      this.produto = {
+        id: produto.id,
+        descricao: produto.descricao,
+        precoUnitario: produto.precoUnitario,
+        quantidade: produto.quantidade,
+        tamanho: produto.tamanho
+      }
     }
   },
-  created(){
-    this.listarProdutos()
-  }
+  created() {
+    this.listarProdutos();
+  },
+  fecharModal() {
+    this.modalIsOpen = false;
+  },
 };
 </script>
 

@@ -85,10 +85,10 @@ router.post('/', (req, res) => {
 	});
 })
 
-// Eliminando usuario "ID"
+// Eliminando clientes "ID"
 router.delete('/:id', (req, res) => {
 	const { id } = req.params
-	db.query('DELETE FROM usuarios WHERE id= ?', [id], (error, results, _) => {
+	db.query('DELETE FROM clientes WHERE id= ?', [id], (error, results, _) => {
 		if (error) {
 			throw error
 		}
@@ -96,13 +96,13 @@ router.delete('/:id', (req, res) => {
 	})
 })
 
-// Atualizar usuário
+// Atualizar clientes
 router.put('/:id', (req, res) => {
 	const { id } = req.params
 
 	const usuario = req.body
 
-	db.query('UPDATE usuarios SET ? WHERE = ?', [usuario, id], (error, results, _) => {
+	db.query('UPDATE clientes SET ? WHERE = ?', [usuario, id], (error, results, _) => {
 		if (error) {
 			throw error
 		}
