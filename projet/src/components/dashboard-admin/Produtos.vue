@@ -202,7 +202,7 @@
                             <button
                             @click="openEditarModalProd(produto)"
                               type="button"
-                              class="btn text-whiter bg-info"
+                              class="btn text-white bg-info"
                               data-bs-toggle="modal"
                               data-bs-target="#staticBackdrop"
                             >
