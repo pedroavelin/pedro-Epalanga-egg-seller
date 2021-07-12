@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const db = require('../../db')
+const auth = require('../../middlewares/auth')
 
 router.get('/', (_, res) => {
   // listar os "Produtos" que estão na BD
@@ -35,7 +36,6 @@ router.post('/', (req, res) => {
     if (error) {
       throw error
     }
-
     const produto = {
       descricao: req.body.descricao,
       precoUnitario: req.body.precoUnitario,

@@ -1,7 +1,11 @@
 const bodyParser = require('body-parser')
+const sqlInjectionProtection = require('./sql_injection')
+const xss = require('./xss')
 
-const middlewares =[
-  bodyParser.json()
+const middlewares = [
+  bodyParser.json(),
+  sqlInjectionProtection,
+  xss
 ]
 
 module.exports = {

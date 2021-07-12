@@ -28,30 +28,24 @@
               </div>
               <div class="container mt-3">
                 <form
-                  action=""
                   class="row g-3 was-validated needs-validation"
                   novalidate
                 >
                   <div class="row">
                     <div class="col-lg-4">
                       <div class="mb-2">
-                        <select
-                          class="form-select py-1"
+                        <input
+                        v-model="despesa.descricaoDespesa"
+                          type="text"
+                          class="form-control py-1"
+                          aria-label="file example"
                           required
-                          aria-label="select example"
-                        >
-                          <option value="">Selecionar despesa</option>
-                          <option value="1">Água</option>
-                          <option value="2">Energia</option>
-                          <option value="3">Vacinas</option>
-                          <option value="4">Compra de galinhas</option>
-                          <option value="5">Fabricação de ração/compra</option>
-                          <!-- <option value="5"></option> -->
-                        </select>
-                        <div class="invalid-feedback">selecione uma opção</div>
+                        />
+                        <div class="invalid-feedback">Descreva a despesa</div>
                       </div>
                       <div class="mb-2">
                         <input
+                        v-model="despesa.precoUnitario"
                           type="number"
                           class="form-control py-1"
                           aria-label="file example"
@@ -65,6 +59,7 @@
                     <div class="col-lg-4">
                       <div class="mb-2">
                         <input
+                        v-model="despesa.quantidade"
                           type="number"
                           class="form-control py-1"
                           aria-label="file example"
@@ -74,6 +69,7 @@
                       </div>
                       <div class="mb-2">
                         <input
+                        v-model="despesa.totalPago"
                           type="text"
                           class="form-control py-1"
                           aria-label="file example"
@@ -84,23 +80,23 @@
                       </div>
                     </div>
                     <div class="col-lg-4">
-                      <div class="mb-2">
-                        <select
-                          class="form-select py-1"
+                       <div class="mb-2">
+                        <input
+                        v-model="despesa.modPagamento"
+                          type="text"
+                          class="form-control py-1"
+                          minlength="5"
+                          aria-label="file example"
                           required
-                          aria-label="select example"
-                        >
-                          <option value="">Tipo de pagamento</option>
-                          <option value="1">Caixa</option>
-                          <option value="2">Banco</option>
-                        </select>
+                        />
                         <div class="invalid-feedback">Tipo de pagamento</div>
                       </div>
                       <div class="mb-2">
                         <textarea
+                        v-model="despesa.descricao"
                           class="form-control is-invalid"
                           id="validationTextarea"
-                          placeholder="Descrição"
+                          placeholder=""
                           required
                         ></textarea>
                       </div>
@@ -143,7 +139,6 @@
                         Lista de despesas vazia.
                       </div>
                       <tr v-for="despesa in listaDespesas" :key="despesa.id">
-                        <!-- <td>{{ index + 1 }}</td> -->
                         <td>{{ despesa.descricaoDespesa }}</td>
                         <td>{{ despesa.valorUnit }}</td>
                         <td>{{ despesa.quantidade }}</td>
@@ -151,7 +146,6 @@
                         <td>{{ despesa.modPagamento }}</td>
                         <td>{{ despesa.enderecoBancario }}</td>
                         <td>{{ despesa.totalPago }}</td>
-
                         <td>
                           <div
                             class="btn-group btn-group-sm"
@@ -200,6 +194,24 @@ export default {
     };
   },
   methods: {
+    registarDespesa(){
+      this.newDespesa = {
+        descricaoDespesa: this.despesa.descricaoDespesa,
+        valorUnit: this.despesa.valorUnit,
+        quantidade: this.despesa.quantidade,
+        observacao: this.despesa.observacao,
+        modPagamento: this.despesa.modPagamento,
+        enderecoBancario: this.despesa.enderecoBancario,
+        totalPago: this.despesa.totalPago
+      }
+      this.axios.post('http://localhost:3000/despesas', newDespesa).then((response)=>{
+        if (error) {
+          alert('Usuário cadastrado com sucesso')
+        }else{
+          alert('Erro ao cadastrar usuário')
+        }
+      })
+    },
     listarDespesas() {
       this.axios.get("http://localhost:3000/despesas").then((response) => {
         this.listaDespesas = response.data.data;

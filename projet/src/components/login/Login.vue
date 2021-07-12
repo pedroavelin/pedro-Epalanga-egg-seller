@@ -12,36 +12,38 @@
           </div>
           <div class="col-md-6 col-lg-6 text-center py-5">
             <h1 class="text-uppercase">Entrar</h1>
-              <h4 class="fw-bold py-2">Área administrativa</h4>
-              <div class="form-row py-3 pt-3">
-                <div class="offset-1 col-lg-10">
-                  <input
-                    type="text"
-                    class="input px-3"
-                    placeholder="Nome do usuário"
-                  />
-                </div>
+            <h4 class="fw-bold py-2">Área administrativa</h4>
+            <div class="form-row py-3 pt-3">
+              <div class="offset-1 col-lg-10">
+                <input
+                  v-model="usuario.nome"
+                  type="text"
+                  class="input px-3"
+                  placeholder="Nome do usuário"
+                />
               </div>
-              <div class="form-row py-3">
-                <div class="offset-1 col-lg-10">
-                  <input
-                    type="password"
-                    class="input px-3"
-                    placeholder="Senha"
-                  />
-                </div>
+            </div>
+            <div class="form-row py-3">
+              <div class="offset-1 col-lg-10">
+                <input
+                  v-model="usuario.senha"
+                  type="password"
+                  class="input px-3"
+                  placeholder="Senha"
+                />
               </div>
-              <div class="form-row py-3">
-                <div class="offset-1 col-lg-10">
-                  <button
-                    @click="login()"
-                    type=""
-                    class="btnEntrar btn-danger text-white btn-outline-success"
-                  >
-                    Entrar
-                  </button>
-                </div>
+            </div>
+            <div class="form-row py-3">
+              <div class="offset-1 col-lg-10">
+                <button
+                  @click="login()"
+                  type=""
+                  class="btnEntrar btn-danger text-white btn-outline-success"
+                >
+                  Entrar
+                </button>
               </div>
+            </div>
           </div>
         </div>
       </div>
@@ -53,14 +55,36 @@
 export default {
   data() {
     return {
-      name: "Login",
+      usuario: {
+        nome: '',
+        senha: '',
+      },
     };
   },
 
   methods: {
     login() {
-      // debugger
-      this.$router.push('/encomendas');
+      let userLogin = {
+        nome: this.usuario.nome,
+        senha: this.usuario.senha,
+      };
+      this.axios
+        .post("http://localhost:3000/login", userLogin)
+        .then((response) => {
+          if (response.data.code === 200) {
+            this.$router.push("/encomendas")
+            this.$swal("success!", "Verifique as suas credênciais", "success");
+            limparInputs()
+          } else {
+            this.$swal("Erro!", "Verifique as suas credênciais", "error");
+          }
+        });
+    },
+     limparInputs() {
+      this.usuario = {
+        nome: "",
+        senha: ""
+      };
     },
   },
 };

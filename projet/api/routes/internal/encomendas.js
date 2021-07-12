@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const db = require('../../db')
+const auth = require('../../middlewares/auth')
 
 router.get('/', (_, res) => {
     // listar os "Encomendas" que estão na BD

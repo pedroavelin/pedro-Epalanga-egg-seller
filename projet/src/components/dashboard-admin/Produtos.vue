@@ -238,10 +238,10 @@ export default {
       modalIsOpen: false,
       produto: {
         id: null,
-        descricao: "",
-        precoUnitario: "",
-        quantidade: "",
-        tamanho: "",
+        descricao: '',
+        precoUnitario: '',
+        quantidade: '',
+        tamanho: '',
       },
       produtos: [],
     };
@@ -275,13 +275,13 @@ export default {
         descricao: this.produto.descricao,
         precoUnitario: this.produto.precoUnitario,
         quantidade: this.produto.quantidade,
-        tamanho: this.produto.tamanho,
+        tamanho: this.produto.tamanho
       };
 
       this.axios
         .post("http://localhost:3000/produtos", newProduto)
         .then((response) => {
-          if (response.data.Status !== "success") {
+          if (response.data.code === 200) {
             this.listarProdutos();
             this.limparInputs();
             this.$swal("Parabéns!", "Sucesso ao cadastrar", "success");
@@ -301,7 +301,7 @@ export default {
       this.axios
         .put("http://localhost:3000/produtos" + this.produtos.id, newProduto)
         .then((response) => {
-          if (response.data.Status !== "success") {
+          if (response.data !== "success") {
             this.listarProdutos();
             this.limparInputs();
             this.$swal("Parabéns!", "Sucesso ao editar", "success");
@@ -316,6 +316,7 @@ export default {
         this.produtos = response.data.data;
       });
     },
+    
     limparInputs() {
       this.produto = {
         descricao: "",
