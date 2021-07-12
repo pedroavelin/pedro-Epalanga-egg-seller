@@ -71,12 +71,12 @@ export default {
       this.axios
         .post("http://localhost:3000/login", userLogin)
         .then((response) => {
-          if (response.data.code === 200) {
+          console.log(response);
+          if (response.status === 200) {
+            this.limparInputs()
             this.$router.push("/encomendas")
-            this.$swal("success!", "Verifique as suas credênciais", "success");
-            limparInputs()
           } else {
-            this.$swal("Erro!", "Verifique as suas credênciais", "error");
+            this.$swal("Erro!!", "Verifique as suas credênciais", "error");
           }
         });
     },

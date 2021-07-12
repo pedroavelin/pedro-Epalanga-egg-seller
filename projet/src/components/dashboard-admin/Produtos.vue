@@ -192,7 +192,7 @@
                         <td>{{ produto.precoUnitario }}</td>
                         <td>{{ produto.quantidade }}</td>
                         <td>{{ produto.tamanho }}</td>
-                        <td>{{ produto.dataRegistro }}</td>
+                        <td>{{ formantarData(produto.dataRegistro) }}</td>
                         <td>
                           <div
                             class="btn-group btn-group-sm"
@@ -232,6 +232,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 export default {
   data() {
     return {
@@ -247,6 +248,11 @@ export default {
     };
   },
   methods: {
+    formantarData(data){
+      let separarData = data.split('.')[0]
+     return  moment(separarData, 'YYYY-MM-DDTHH:mm:ss').format('DD-MM-YYYY')
+
+    },
     atualizarProduto() {
       this.axios.put("http://localhost:3000/produtos").then((response) => {
         console.log(response);
@@ -255,7 +261,7 @@ export default {
     // Obs: Não está funcionando corretamente
     eliminarProduto(id) {
       this.axios
-        .delete(`http://localhost:3000/produtos` + id)
+        .delete(`http://localhost:3000/produtos/` + id)
         .then((response) => {
           // if (response.data.code === ) {
           //   this.$swal("Sucesso!", "Produto eliminado com sucesso", "error");
@@ -267,10 +273,6 @@ export default {
         });
     },
     cadastrarProd() {
-      if (this.produto === "") {
-        this.$swal("Por favor!", "Preencha o formulário", "error");
-        return;
-      }
       let newProduto = {
         descricao: this.produto.descricao,
         precoUnitario: this.produto.precoUnitario,
@@ -284,7 +286,7 @@ export default {
           if (response.data.code === 200) {
             this.listarProdutos();
             this.limparInputs();
-            this.$swal("Parabéns!", "Sucesso ao cadastrar", "success");
+            this.$swal("success!", "Sucesso ao cadastrar", "success");
           } else {
             this.$swal("Good job!", "Erro ao cadastrar", "error");
           }
@@ -299,12 +301,12 @@ export default {
       };
 
       this.axios
-        .put("http://localhost:3000/produtos" + this.produtos.id, newProduto)
+        .put("http://localhost:3000/produtos/" + this.produto.id, newProduto)
         .then((response) => {
           if (response.data !== "success") {
             this.listarProdutos();
             this.limparInputs();
-            this.$swal("Parabéns!", "Sucesso ao editar", "success");
+            this.$swal("success!", "Produto modificado com Sucesso", "success");
           } else {
             this.$swal("Erro!", "Erro ao editar", "error");
           }

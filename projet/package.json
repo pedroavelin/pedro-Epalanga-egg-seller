@@ -24,6 +24,7 @@
         "hash": "^0.2.1",
         "indicative": "^7.4.4",
         "jsonwebtoken": "^8.5.1",
+        "moment": "^2.29.1",
         "mysql2": "^2.2.5",
         "nprogress": "^0.2.0",
         "sweetalert2": "^11.0.17",
