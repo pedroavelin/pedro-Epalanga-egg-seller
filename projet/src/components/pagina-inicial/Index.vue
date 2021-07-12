@@ -55,35 +55,20 @@
                 v-model="cliente.email"
                   type="email"
                   class="form-control input-field"
-                  id="email"
                   placeholder="E-mail"
                   required
                 />
               </div>
 
               <div class="col-lg-6">
-                <select
-                  v-model="enderecos.id"
-                 class="form-select mt-3" 
-                 aria-label="Default select example">
-                  <option selected disabled>Provincia</option>
-                  <option
-                    v-for="clientes in enderecos" :key="clientes.id"
-                    value="endereco.id"
-                    selected
-                  >
-                  {{enderecos.provincia}}
-                  </option>
-                  
-                </select>
-                <!-- <input
+                <input
                 v-model="cliente.provincia"
                   type="text"
                   class="form-control input-field"
                   id="provincia"
                   placeholder="Provincia"
                   required
-                /> -->
+                />
               </div>
               <div class="col-lg-6">
                 <input
@@ -192,7 +177,7 @@
               </div>
             </div>
             <div class="container">
-              <button type="submit" class="submit-btn mt-3 btn btn-success">
+              <button type="button" class="submit-btn mt-3 btn btn-success">
                 Encomendar
               </button>
             </div>
@@ -207,16 +192,13 @@
             <div class="col-lg-7 pt-4 text-center">
               <h1 class="textoPrincipal">
                 <p class="animate__animated animate__zoomIn animate__delay-0s">
-                  Faça
-                </p>
-                <p class="animate__animated animate__zoomIn animate__delay-1s">
-                  sua encomenda de ovos
+                  Encomende já sua caixa de ovos 
                 </p>
                 <p class="animate__animated animate__zoomIn animate__delay-2s">
-                  com apenas um click
+                  com um click
                 </p>
                 <p class="animate__animated animate__zoomIn animate__delay-3s">
-                  sem sair de casa
+                  sem sair de casa por 30.000,00kz
                 </p>
               </h1>
               <button class="btn1 mt-3">Encomendar</button>
@@ -617,13 +599,27 @@ export default {
       this.axios
         .post("http://localhost:3000/clientes", newCliente)
         .then((response) => {
-          if (response.data.data.code === 200) {
-            console.log("Usuário cadastrado com sucess !!!");
+          if (response.status === 200) {
+            this.limparInputs()
+            this.$swal("Sucesso!", "Cadastrado com sucesso", "success");
           } else {
-            console.log("Erro ao cadastrar usuário.");
+           this.$swal("Up´s!", "Falha ao se cadastrar", "error");
           }
         });
     },
+    limparInputs(){
+      this.cliente ={
+        nome: '',
+        numeroTelefone: '',
+        email: '',
+        provincia: '',
+        municipio: '',
+        bairro: '',
+        numeroCasa: '',
+        senha: '',
+      }
+    },
+
     registar() {
       document.getElementById("entrar").style.left = "-400px";
       document.getElementById("registar").style.left = "50px";
@@ -788,14 +784,14 @@ export default {
   overflow: hidden;
 }
 .button-box {
-  width: 230px;
+  width: 219px;
   margin: 35px auto;
   position: relative;
   box-shadow: 0 0 20px 19px #0099ff1f;
   border-radius: 100px;
 }
 .toggle-btn {
-  padding: 10px 20px;
+  padding: 10px 30px;
   cursor: pointer;
   background: transparent;
   border: 0;
@@ -835,7 +831,7 @@ export default {
   padding: 10px;
   cursor: pointer;
   display: block;
-  margin-left: 20px;
+  margin-left: 0;
   border: 0;
   outline: none;
   border-radius: 30px;

@@ -263,13 +263,12 @@ export default {
       this.axios
         .delete(`http://localhost:3000/produtos/` + id)
         .then((response) => {
-          // if (response.data.code === ) {
-          //   this.$swal("Sucesso!", "Produto eliminado com sucesso", "error");
-          //   this.listarProdutos()
-          // }else{
-          //   this.$swal("Erro!", "Produto não eliminado", "error");
-          // }
-          console.log(response);
+          if (response.status === 200 ) {
+            this.$swal("Up´s!", "Produto eliminado com sucesso", "error");
+            this.listarProdutos()
+          }else{
+            this.$swal("Erro!", "Produto não eliminado", "error");
+          }
         });
     },
     cadastrarProd() {
@@ -283,10 +282,10 @@ export default {
       this.axios
         .post("http://localhost:3000/produtos", newProduto)
         .then((response) => {
-          if (response.data.code === 200) {
+          console.log(response);
+          if (response.status === 200) {
             this.listarProdutos();
             this.limparInputs();
-            this.$swal("success!", "Sucesso ao cadastrar", "success");
           } else {
             this.$swal("Good job!", "Erro ao cadastrar", "error");
           }
