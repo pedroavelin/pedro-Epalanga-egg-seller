@@ -205,10 +205,12 @@ export default {
         totalPago: this.despesa.totalPago
       }
       this.axios.post('http://localhost:3000/despesas', newDespesa).then((response)=>{
-        if (error) {
-          alert('Usuário cadastrado com sucesso')
+        if (response.status === 200) {
+          this.listaDespesas()
+          this.limparInputs()
+           this.$swal("Sucesso!!", "Você cadastrou uma nova despesa", "success");
         }else{
-          alert('Erro ao cadastrar usuário')
+           this.$swal("Erro!", "Não foi possível cadastar a despesa", "error");
         }
       })
     },
@@ -217,6 +219,17 @@ export default {
         this.listaDespesas = response.data.data;
       });
     },
+    limparInputs(){
+      this.despesa ={
+        descricaoDespesa: '',
+        valorUnit: '',
+        quantidade: '',
+        observacao: '',
+        modPagamento:'',
+        enderecoBancario: '',
+        totalPago: '',
+      }
+    }
   },
   created() {
     this.listarDespesas();

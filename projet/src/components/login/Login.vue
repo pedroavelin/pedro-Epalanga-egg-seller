@@ -16,10 +16,11 @@
             <div class="form-row py-3 pt-3">
               <div class="offset-1 col-lg-10">
                 <input
-                  v-model="usuario.nome"
+                  v-model="usuario.email"
                   type="text"
                   class="input px-3"
-                  placeholder="Nome do usuário"
+                  placeholder="Email do usuário"
+                  required
                 />
               </div>
             </div>
@@ -30,6 +31,7 @@
                   type="password"
                   class="input px-3"
                   placeholder="Senha"
+                  required
                 />
               </div>
             </div>
@@ -56,8 +58,8 @@ export default {
   data() {
     return {
       usuario: {
-        nome: '',
-        senha: '',
+        email: "",
+        senha: "",
       },
     };
   },
@@ -65,7 +67,7 @@ export default {
   methods: {
     login() {
       let userLogin = {
-        nome: this.usuario.nome,
+        email: this.usuario.email,
         senha: this.usuario.senha,
       };
       this.axios
@@ -73,17 +75,17 @@ export default {
         .then((response) => {
           console.log(response);
           if (response.status === 200) {
-            this.limparInputs()
+            this.limparInputs();
             this.$router.push("/encomendas")
           } else {
             this.$swal("Erro!!", "Verifique as suas credênciais", "error");
           }
         });
     },
-     limparInputs() {
+    limparInputs() {
       this.usuario = {
-        nome: "",
-        senha: ""
+        email: "",
+        senha: "",
       };
     },
   },

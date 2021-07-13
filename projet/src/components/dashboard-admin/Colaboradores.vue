@@ -122,6 +122,7 @@
               Cadastrar colaborador
             </h5>
             <button
+            @click="limparInputCol()"
               type="button"
               class="btn-close"
               data-bs-dismiss="modal"
@@ -152,6 +153,7 @@
                     <input
                       v-model="colaborador.numeroTelefone"
                       type="number"
+                         oninput="validity.valid||(value='');"
                       class="form-control py-1"
                       aria-label="file example"
                       required
@@ -215,6 +217,7 @@
                     <input
                       v-model="colaborador.salario"
                       type="number"
+                      min="0" oninput="validity.valid||(value='');"
                       class="form-control py-1"
                       aria-label="file example"
                       required
@@ -249,6 +252,7 @@
           <div class="modal-footer">
             <button
               type="button"
+              @click="limparInputCol()"
               class="btn btn-danger btn-sm"
               data-bs-dismiss="modal"
             >
@@ -307,11 +311,13 @@ export default {
         senha: this.colaborador.senha,
       };
       this.axios.post("http://localhost:3000/colaboradores", newColaboradores).then((response) => {
-        if (response.data.code === 200) {
-            alert("Usuário cadastrado com sucesso !!");
-            this.limparInputCol();
+      //  console.log(response);
+       if (response.status === 200) {
+         this.$swal("Up´s!", "Erro a cadastrar", "success");
+          this.listarColaboradores()
+            this.limparInputCol()
           } else {
-            alert("Erro ao cadastradar Usuário");
+           this.$swal("Up´s!", "Erro a cadastrar", "error");
           }
         });
     },
