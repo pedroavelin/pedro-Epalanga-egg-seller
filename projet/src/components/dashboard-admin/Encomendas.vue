@@ -245,8 +245,9 @@ export default {
   },
  methods: {
     listarEncomendas() {
-    this.axios.get("http://localhost:300/encomendas").then((response) => {
-      this.listarEncomendas = response.data.data;
+    this.axios.get("http://localhost:3000/encomendas").then((response) => {
+      console.log(response.data.data);
+      this.listaEncomendas = response.data.data;
     });
   },
  },

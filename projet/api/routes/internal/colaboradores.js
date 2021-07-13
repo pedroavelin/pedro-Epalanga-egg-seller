@@ -6,7 +6,7 @@ const { sanitize } = require('indicative/sanitizer')
 const bcrypt = require('bcrypt')
 router.get('/', (_, res) => {
 	// listar os "colaboradores" que estão na BD
-	db.query('SELECT u.id, u.nome, u.numeroTelefone, u.email, u.dataCadastro, c.salario, e.provincia, e.municipio, e.bairro, e.numeroCasa from usuarios u join colaboradores c on (c.usuarios_id = u.id) join enderecos e on (c.enderecos_id = e.id) order by u.nome ', (error, results, _) => {
+	db.query('SELECT u.id, u.isAdmin, u.nome, u.numeroTelefone, u.email, u.dataCadastro, c.salario, e.provincia, e.municipio, e.bairro, e.numeroCasa from usuarios u join colaboradores c on (c.usuarios_id = u.id) join enderecos e on (c.enderecos_id = e.id) order by u.dataCadastro LIMIT 7 ', (error, results) => {
 		if (error) {
 			throw error
 		}
@@ -35,7 +35,8 @@ router.post('/', (req, res) => {
 		nome: req.body.nome,
 		numeroTelefone: req.body.numeroTelefone,
 		email: req.body.email,
-		senha: req.body.senha
+		senha: req.body.senha,
+		isAdmin: req.body.isAdmin,
 	}
 
 	validate(usuario, {

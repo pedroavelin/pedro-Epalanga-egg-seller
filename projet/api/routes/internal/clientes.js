@@ -47,8 +47,10 @@ router.post('/', (req, res) => {
     nome: req.body.nome,
     numeroTelefone: req.body.numeroTelefone,
     email: req.body.email,
-    senha: req.body.senha
+    senha: req.body.senha,
+    isAdmin: req.body.isAdmin
   }
+
   validate(usuario, {
     nome: 'required',
     numeroTelefone: 'required',

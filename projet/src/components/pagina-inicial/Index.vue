@@ -32,7 +32,7 @@
             <div class="row">
               <div class="col-lg-6">
                 <input
-                v-model="cliente.nome"
+                  v-model="cliente.nome"
                   type="text"
                   class="form-control input-field"
                   id="nomeUsu"
@@ -42,17 +42,19 @@
               </div>
               <div class="col-lg-6">
                 <input
-                v-model="cliente.numeroTelefone"
+                  v-model="cliente.numeroTelefone"
                   type="number"
                   class="form-control input-field"
                   id="contacto"
+                  min="0"
+                  oninput="validity.valid||(value='');"
                   placeholder="Telefone"
                   required
                 />
               </div>
               <div class="col-lg-12">
                 <input
-                v-model="cliente.email"
+                  v-model="cliente.email"
                   type="email"
                   class="form-control input-field"
                   placeholder="E-mail"
@@ -62,7 +64,7 @@
 
               <div class="col-lg-6">
                 <input
-                v-model="cliente.provincia"
+                  v-model="cliente.provincia"
                   type="text"
                   class="form-control input-field"
                   id="provincia"
@@ -72,7 +74,7 @@
               </div>
               <div class="col-lg-6">
                 <input
-                v-model="cliente.municipio"
+                  v-model="cliente.municipio"
                   type="text"
                   class="form-control input-field"
                   id="municipio"
@@ -82,7 +84,7 @@
               </div>
               <div class="col-lg-6">
                 <input
-                v-model="cliente.bairro"
+                  v-model="cliente.bairro"
                   type="text"
                   class="form-control input-field"
                   id="bairro"
@@ -92,11 +94,13 @@
               </div>
               <div class="col-lg-6">
                 <input
-                v-model="cliente.numeroCasa"
+                  v-model="cliente.numeroCasa"
                   type="number"
                   class="form-control input-field"
                   id="num_casa"
                   placeholder="Nº casa"
+                  min="0"
+                  oninput="validity.valid||(value='');"
                   required
                 />
               </div>
@@ -110,21 +114,14 @@
                   required
                 />
               </div>
-              <!-- <div class="col-lg-6">
-                <input
-                  type="password"
-                  class="form-control input-field"
-                  id="senha2"
-                  placeholder="Confirmar"
-                  required
-                />
-              </div> -->
             </div>
 
             <div class="container pt-2">
-              <button 
-              @click="cadastrarCliente()"
-              type="submit" class="submit-btn btn btn-success mt-2">
+              <button
+                @click="cadastrarCliente()"
+                type="submit"
+                class="submit-btn btn btn-success mt-2"
+              >
                 Registar
               </button>
             </div>
@@ -133,50 +130,36 @@
             <input
               type="text"
               class="form-control input-field"
-              id="nomeUsuario"
-              placeholder="Nome de usuário"
-              required
-            />
-
-            <input
-              type="password"
-              class="form-control input-field"
-              id="senha"
-              placeholder="Digite a sua senha"
+              id="emailUsuario"
+              placeholder="Digite o seu email"
               required
             />
             <div class="container-fluid">
-              <div class="row mt-3">
-                <div class="col">
-                  <label class="">Descrição</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Caixa"
-                    disabled
-                  />
-                </div>
-                <div class="col">
-                  <label class="">Quantidade</label>
+              <div class="mt-2">
+                <div class="col-12">
+                  <label class="">Quantidade de caixas de ovos</label>
                   <input
                     type="number"
                     class="form-control"
-                    pattern="[0-9]"
+                    min="0"
+                    oninput="validity.valid||(value='');"
                     placeholder=""
                   />
                 </div>
-                <div class="col mt-2">
+                <div class="col-12 mt-2">
                   <label class="">Total a pagar</label>
                   <input
                     type="number"
                     class="form-control"
                     placeholder=""
+                    min="0"
+                    oninput="validity.valid||(value='');"
                     readonly
                   />
                 </div>
               </div>
             </div>
-            <div class="container">
+            <div class="container pt-5">
               <button type="button" class="submit-btn mt-3 btn btn-success">
                 Encomendar
               </button>
@@ -192,13 +175,16 @@
             <div class="col-lg-7 pt-4 text-center">
               <h1 class="textoPrincipal">
                 <p class="animate__animated animate__zoomIn animate__delay-0s">
-                  Encomende já sua caixa de ovos 
+                  Encomende já sua caixa de ovos
                 </p>
                 <p class="animate__animated animate__zoomIn animate__delay-2s">
                   com um click
                 </p>
                 <p class="animate__animated animate__zoomIn animate__delay-3s">
-                  sem sair de casa por 30.000,00kz
+                  sem sair de casa por <br>
+                  <span v-for="produto in produtos" :key="produto.id">
+                    {{ produto.precoUnitario +','+'00 kz' }}
+                  </span>
                 </p>
               </h1>
               <button class="btn1 mt-3">Encomendar</button>
@@ -562,16 +548,20 @@ export default {
   data() {
     return {
       cliente: {
-        nome: "",
-        numeroTelefone: "",
-        email: "",
-        provincia: "",
-        municipio: "",
-        bairro: "",
-        numeroCasa: "",
-        senha: "",
+        nome: '',
+        numeroTelefone: '',
+        email: '',
+        provincia: '',
+        municipio: '',
+        bairro: '',
+        numeroCasa: '',
+        senha: '',
+        isAdmin: false,
       },
-      enderecos:[]
+      produtos: [],
+      produto: {
+        precoUnitario: '',
+      },
     };
   },
   components: {
@@ -579,13 +569,28 @@ export default {
     Footer,
   },
   methods: {
-    listarprovincias(){
-      this.axios.get("http://localhost:3000/clientes/provincias").then((response)=>{
-        this.enderecos = response.data.data
-        console.log(response);
-      })
+    listarProdutos() {
+      this.axios.get("http://localhost:3000/produtos").then((response) => {
+        this.produtos = response.data.data;
+      });
+    },
+    mostrarPreco() {
+      let p = this.detalhesProdutos;
     },
     cadastrarCliente() {
+      if (
+        !this.nome ||
+        !this.numeroTelefone ||
+        !this.email ||
+        !this.provincia ||
+        !this.municipio ||
+        !this.bairro ||
+        !this.numeroCasa ||
+        !this.senha
+      ) {
+        this.$swal("Erro!", "Por favor preencha os campos", "error");
+        return;
+      }
       let newCliente = {
         nome: this.cliente.nome,
         numeroTelefone: this.cliente.numeroTelefone,
@@ -595,29 +600,30 @@ export default {
         bairro: this.cliente.bairro,
         numeroCasa: this.cliente.numeroCasa,
         senha: this.cliente.senha,
+        isAdmin: this.cliente.isAdmin,
       };
       this.axios
         .post("http://localhost:3000/clientes", newCliente)
         .then((response) => {
           if (response.status === 200) {
-            this.limparInputs()
+            this.limparInputs();
             this.$swal("Sucesso!", "Cadastrado com sucesso", "success");
           } else {
-           this.$swal("Up´s!", "Falha ao se cadastrar", "error");
+            this.$swal("Up´s!", "Falha ao se cadastrar", "error");
           }
         });
     },
-    limparInputs(){
-      this.cliente ={
-        nome: '',
-        numeroTelefone: '',
-        email: '',
-        provincia: '',
-        municipio: '',
-        bairro: '',
-        numeroCasa: '',
-        senha: '',
-      }
+    limparInputs() {
+      this.cliente = {
+        nome: "",
+        numeroTelefone: "",
+        email: "",
+        provincia: "",
+        municipio: "",
+        bairro: "",
+        numeroCasa: "",
+        senha: "",
+      };
     },
 
     registar() {
@@ -632,7 +638,7 @@ export default {
     },
   },
   created() {
-    this.listarprovincias()
+    this.listarProdutos();
   },
 };
 </script>

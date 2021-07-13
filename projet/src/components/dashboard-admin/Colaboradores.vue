@@ -122,7 +122,7 @@
               Cadastrar colaborador
             </h5>
             <button
-            @click="limparInputCol()"
+              @click="limparInputCol()"
               type="button"
               class="btn-close"
               data-bs-dismiss="modal"
@@ -153,7 +153,8 @@
                     <input
                       v-model="colaborador.numeroTelefone"
                       type="number"
-                         oninput="validity.valid||(value='');"
+                      min="0"
+                      oninput="validity.valid||(value='');"
                       class="form-control py-1"
                       aria-label="file example"
                       required
@@ -217,7 +218,8 @@
                     <input
                       v-model="colaborador.salario"
                       type="number"
-                      min="0" oninput="validity.valid||(value='');"
+                      min="0"
+                      oninput="validity.valid||(value='');"
                       class="form-control py-1"
                       aria-label="file example"
                       required
@@ -228,7 +230,7 @@
                     <input
                       v-model="colaborador.senha"
                       type="current-password"
-                      class="form-control  py-1"
+                      class="form-control py-1"
                       aria-label="file example"
                       required
                     />
@@ -278,15 +280,16 @@ export default {
   data() {
     return {
       colaborador: {
-        nome: '',
-        numeroTelefone: '',
-        email: '',
-        senha: '',
-        provincia: '',
-        municipio: '',
-        bairro: '',
-        numeroCasa: '',
-        salario: '',
+        nome: "",
+        numeroTelefone: "",
+        email: "",
+        senha: "",
+        provincia: "",
+        municipio: "",
+        bairro: "",
+        numeroCasa: "",
+        salario: "",
+        isAdmin: true,
       },
       colaboradores: [],
     };
@@ -297,7 +300,7 @@ export default {
         this.colaboradores = response.data.data;
       });
     },
-    
+
     cadastrarColaborador() {
       let newColaboradores = {
         nome: this.colaborador.nome,
@@ -309,29 +312,32 @@ export default {
         numeroCasa: this.colaborador.numeroCasa,
         salario: this.colaborador.salario,
         senha: this.colaborador.senha,
+        isAdmin: this.colaborador.isAdmin,
       };
-      this.axios.post("http://localhost:3000/colaboradores", newColaboradores).then((response) => {
-      //  console.log(response);
-       if (response.status === 200) {
-         this.$swal("Up´s!", "Erro a cadastrar", "success");
-          this.listarColaboradores()
-            this.limparInputCol()
+      this.axios
+        .post("http://localhost:3000/colaboradores", newColaboradores)
+        .then((response) => {
+          //  console.log(response);
+          if (response.status === 200) {
+            this.$swal("Up´s!", "Erro a cadastrar", "success");
+            this.listarColaboradores();
+            this.limparInputCol();
           } else {
-           this.$swal("Up´s!", "Erro a cadastrar", "error");
+            this.$swal("Up´s!", "Erro a cadastrar", "error");
           }
         });
     },
     limparInputCol() {
       this.colaborador = {
-        nome: '',
-        numeroTelefone: '',
-        email: '',
-        provincia: '',
-        municipio: '',
-        bairro: '',
-        numeroCasa: '',
-        salario: '',
-        senha: '',
+        nome: "",
+        numeroTelefone: "",
+        email: "",
+        provincia: "",
+        municipio: "",
+        bairro: "",
+        numeroCasa: "",
+        salario: "",
+        senha: "",
       };
     },
   },

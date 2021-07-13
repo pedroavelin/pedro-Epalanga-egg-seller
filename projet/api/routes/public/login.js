@@ -8,8 +8,7 @@ module.exports = (req, res) => {
     email: 'required|email',
     senha: 'required',
   }).then((value) => {
-    db.query('SELECT * FROM usuarios WHERE email = ?', [value.email], (error, results) => {
-      console.log(results);
+    db.query('SELECT * FROM usuarios WHERE email = ? AND isAdmin !=0', [value.email], (error, results) => {
       if (results.length === 0) {
         res.status(400).send('Não foi possível encontrar nenhuma conta que corresponda ao e-mail e senha fornecidos')
       } else {

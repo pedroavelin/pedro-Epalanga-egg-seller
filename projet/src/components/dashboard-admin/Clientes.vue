@@ -102,6 +102,7 @@ export default {
         municipio: '',
         bairro: '',
         numeroCasa: '',
+        isAdmin: false
       },
       usuarios: [],
     };

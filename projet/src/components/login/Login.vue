@@ -58,8 +58,8 @@ export default {
   data() {
     return {
       usuario: {
-        email: "",
-        senha: "",
+        email: '',
+        senha: '',
       },
     };
   },
@@ -84,8 +84,8 @@ export default {
     },
     limparInputs() {
       this.usuario = {
-        email: "",
-        senha: "",
+        email: '',
+        senha: '',
       };
     },
   },
