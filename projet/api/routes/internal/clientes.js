@@ -6,7 +6,7 @@ const db = require('../../db')
 const bcrypt = require('bcrypt')
 router.get('/', (_, res) => {
   // listar os "Clientes" que estão na BD
-  db.query('SELECT u.id, u.nome, u.numeroTelefone, u.email, u.dataCadastro, e.provincia, e.municipio, e.bairro, e.numeroCasa from clientes c join usuarios u on (c.usuarios_id= u.id) JOIN clientes_has_enderecos ce on (ce.clientes_id = c.id ) join enderecos e on (ce.enderecos_id = e.id) order by e.id LIMIT 8', (error, results, _) => {
+  db.query('SELECT u.id, u.nome, u.numeroTelefone, u.email, u.dataCadastro, e.provincia, e.municipio, e.bairro, e.numeroCasa from clientes c join usuarios u on (c.usuarios_id= u.id) JOIN clientes_has_enderecos ce on (ce.clientes_id = c.id ) join enderecos e on (ce.enderecos_id = e.id) order by u.dataCadastro LIMIT 8', (error, results, _) => {
     if (error) {
       throw error
     }
@@ -14,6 +14,30 @@ router.get('/', (_, res) => {
       data: results
     },
     );
+  })
+})
+
+router.get('/selectBox', (req, res) => {
+  // listar os nome dos "Clientes" no "select" 
+  db.query('select u.id, u.nome from usuarios u join clientes c on (c.usuarios_id=u.id) order by u.id desc limit 10', (error, results, _) => {
+    if (error) {
+      throw error
+    }
+    res.send({
+      data: results
+    } );
+  })
+})
+router.get('/selectBoxProduto', (req, res) => {
+  // listar o nome do "Produto" no "select" 
+  //console.logg(selectBox'')
+  db.query('SELECT id, descricao from produtos', (error, results, _) => {
+    if (error) {
+      throw error
+    }
+    res.send({
+      data: results
+    } );
   })
 })
 

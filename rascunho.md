@@ -122,50 +122,48 @@
             </div>
           </div>
           <div id="entrar" class="input-group">
+            <select class="form-control" v-model="encomenda.cliente_id">
+              <option
+                v-for="item in clientes"
+                :key="item.id"
+                :value="item.id"
+                selected
+              >
+                {{ item.nome }}
+              </option>
+            </select>
+            <input
+              v-model="encomenda.nome"
+              type="text"
+              class="form-control input-field"
+              id="nomeCliente"
+              placeholder="Informe seu nome"
+              required
+            />
+            <input
+              v-model="encomenda.email"
+              type="email"
+              class="form-control input-field mt-4"
+              id="emailCliente"
+              placeholder="Digite o seu email"
+              required
+            />
             <div class="container">
-              <div class="col-lg-12">
-                <label for="" class="">Selecione apenas seu nome</label>
-                <select class="form-control" v-model="encomenda.cliente_id">
-                  
-                  <option
-                    v-for="item in clientes"
-                    :key="item.id"
-                    :value="item.id"
-                    selected
-                  >
-                    {{ item.nome }}
-                  </option>
-                </select>
-              </div>
-              <div class="col-lg-12 mt-3">
-                <label for="" class="">Selecionar produto</label>
-                <select class="form-control" v-model="produto.cliente_id">
-                  <option value="Selecione o produto">
-                    Selecione o produto
-                  </option>
-                  <option
-                    v-for="item in produtos"
-                    :key="item.id"
-                    :value="item.id"
-                  >
-                    {{ item.descricao }}
-                  </option>
-                </select>
-              </div>
-              <div class="col-lg-12 mt-3">
-                <label class="">Digite a quantidade</label>
-                <input
-                  v-model="encomenda.quantidade"
-                  type="number"
-                  class="form-control input-field"
-                  min="0"
-                  id="quantidade"
-                  oninput="validity.valid||(value='');"
-                  placeholder="Digite a quantidade"
-                />
+              <div class="mt-3">
+                <div class="col-12">
+                  <label class="">Quantidade de caixas de ovos</label>
+                  <input
+                    v-model="encomenda.quantidade"
+                    type="number"
+                    class="form-control input-field"
+                    min="0"
+                    id="quantidade"
+                    oninput="validity.valid||(value='');"
+                    placeholder="Digite a quantidade"
+                  />
+                </div>
               </div>
             </div>
-
             <div class="container pt-4">
               <button
                 @click="encomendar()"
@@ -567,7 +565,7 @@ export default {
         bairro: '',
         numeroCasa: '',
         senha: '',
-        isAdmin: false, 
+        isAdmin: false,
       },
       produtos: [],
       clientes: [],
@@ -581,7 +579,6 @@ export default {
         pagamento: null,
         email: null,
         descricao: null,
-        quantidade: null,
       },
       encomendas: [],
     };
@@ -592,14 +589,13 @@ export default {
   },
   methods: {
     encomendar() {
-      // if (!this.nome || !this.email) {
-      //   this.$swal("Erro!", "Por favor preencha os campos", "error");
-      //   return;
-      // }
+      if (!this.nome || !this.email) {
+        this.$swal("Erro!", "Por favor preencha os campos", "error");
+        return;
+      }
       let novaEncomenda = {
-        cliente_id: this.encomenda.cliente_id,
-        produto_id: this.encomenda.produto_id,
-        quantidade: this.encomenda.quantidade,
+        nome: this.encomenda.nome,
+        email: this.encomenda.email,
       };
 
       this.axios
@@ -622,8 +618,7 @@ export default {
         });
     },
 
-    listarProdutos() {
-      // trazer os podutos
+    listarProdutos() {      // traazer os podutos
       this.axios.get("http://localhost:3000/produtos").then((response) => {
         this.produtos = response.data.data;
       });
@@ -639,13 +634,19 @@ export default {
     },
     listarDescProduto() {
       this.axios
-        .get("http://localhost:3000/clientes/selectBoxProduto", null)
+        .get("http://localhost:3000/clientes/selectBox", null)
         .then((response) => {
           console.log(response);
-          this.produto = response.data.data;
+          this.clientes = response.data.data;
         });
     },
 
+    totalPagar() {
+      // rever
+      for (let i = 0; i < this.produtos; i++) {
+        
+      }
+    },
     cadastrarCliente() {
       if (
         !this.nome ||
@@ -657,8 +658,8 @@ export default {
         !this.numeroCasa ||
         !this.senha
       ) {
-        this.$swal("Erro!", "Por favor preencha os campos", "error")
-        return
+        this.$swal("Erro!", "Por favor preencha os campos", "error");
+        return;
       }
       let newCliente = {
         nome: this.cliente.nome,
@@ -710,7 +711,7 @@ export default {
   created() {
     this.listarProdutos();
     this.listarClientes();
-    this.listarDescProduto();
+    this.listarDescProduto()
   },
 };
 </script>
