@@ -29,8 +29,8 @@ router.get('/:id', (req, res) =>{
 
 // Inserindo um novo Despesas 
 router.post('/', (req, res)=>{
-    const usuario = req.body
-    db.query('INSERT INTO despesas SET ?',[usuario], (error, results, _)=>{
+    const despesa = req.body
+    db.query('INSERT INTO despesas SET ?',[despesa], (error, results, _)=>{
         if(error){
             throw error
         }

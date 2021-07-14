@@ -22,9 +22,9 @@
           <div class="row">
             <div class="col-lg-12">
               <div class="container">
-                <button type="button" class="btn btn-success py-1 mb-2">
+                <!-- <button type="button" class="btn btn-success py-1 mb-2">
                   <b-icon icon="trash" scale="1"></b-icon> Criar despesa
-                </button>
+                </button> -->
               </div>
               <div class="container mt-3">
                 <form
@@ -101,7 +101,9 @@
                         ></textarea>
                       </div>
                       <!-- <div class="container"> -->
-                      <button type="button" class="btn btn-success py-1 mb-2">
+                      <button
+                      @click="registarDespesa()"
+                       type="button" class="btn btn-success py-1 mb-2">
                         <b-icon icon="hand-thumbs-up" scale="1"></b-icon> Salvar
                       </button>
                       <!-- </div> -->
