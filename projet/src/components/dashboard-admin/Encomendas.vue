@@ -38,7 +38,6 @@
                         <th scope="col">P. Unit</th>
                         <th scope="col">Quantidade</th>
                         <th scope="col">Tamanho</th>
-                        <th scope="col">Total</th>
                         <th scope="col">Estado</th>
                         <th scope="col">Contacto</th>
                         <th scope="col">Data Encomenda</th>
@@ -46,7 +45,7 @@
                       </tr>
                     </thead>
                     <tbody class="text-center">
-                       <div
+                      <div
                         v-if="!temEncomendas"
                         class="alert alert-danger p-0 m-auto"
                         role="alert"
@@ -54,16 +53,17 @@
                         Sua lista de encomendas encontra-se vazia.
                       </div>
                       <tr
-                      v-for="encomenda in listaEncomendas" :key="encomenda.id" >
-                        <td scope="row">{{encomenda.Descrição}}</td>
-                        <td>{{encomenda.Descrição}}</td>
-                        <td>{{encomenda.precoUnitario}}</td>
-                        <td>{{encomenda.quantidade}}</td>
-                        <td>{{encomenda.tamanho}}</td>
-                        <td>{{encomenda.totalPago}}</td>
-                        <td>{{encomenda.estado}}</td>
-                        <td>{{encomenda.numeroTelefone}}</td>
-                        <td>{{encomenda.dataEncomenda}}</td>
+                        v-for="encomenda in listaEncomendas"
+                        :key="encomenda.id"
+                      >
+                        <td scope="row">{{ encomenda.nome }}</td>
+                        <td>{{ encomenda.descricao }}</td>
+                        <td>{{ encomenda.precoUnitario }}</td>
+                        <td>{{ encomenda.quantidade }}</td>
+                        <td>{{ encomenda.tamanhos_id }}</td>
+                        <td>{{ encomenda.estado }}</td>
+                        <td>{{ encomenda.numeroTelefone }}</td>
+                        <td>{{ formantarData(encomenda.dataEncomenda) }}</td>
                         <td>
                           <div
                             class="btn-group btn-group-sm"
@@ -226,31 +226,34 @@
 </template>
 
 <script>
+import moment from "moment";
 export default {
   data() {
     return {
       encomenda: {
-        nome: '',
-        descricao: '',
-        precoUnitario: '',
-        quantidade: '',
-        tamanho: '',
-        totalPago: '',
-        estado: '',
-        numeroTelefone: '',
-        dataEncomenda: ''
+        nome: "",
+        descricao: "",
+        precoUnitario: "",
+        numeroTelefone: "",
+        estado: "",
+        quantidade: "",
+        tamanhos_id: "",
+        dataEncomenda: "",
       },
       listaEncomendas: [],
     };
   },
- methods: {
+  methods: {
+    formantarData(data) {
+      let separarData = data.split(".")[0];
+      return moment(separarData, "YYYY-MM-DDTHH:mm:ss").format("DD-MM-YYYY");
+    },
     listarEncomendas() {
-    this.axios.get("http://localhost:3000/encomendas").then((response) => {
-      console.log(response.data.data);
-      this.listaEncomendas = response.data.data;
-    });
+      this.axios.get("http://localhost:3000/encomendas").then((response) => {
+        this.listaEncomendas = response.data.data;
+      });
+    },
   },
- },
   created() {
     this.listarEncomendas();
   },

@@ -3,13 +3,8 @@
     <Navbar />
     <div class="pt-1 mt-5">
       <!-- start_login_and_sigIn -->
-      <div
-        class="
-          first-content
-          mt-3
-          animate__animated animate__zoomIn animate__delay-4s
-        "
-      >
+      <div class="first-content mt-3 animate__animated animate__delay-4s">
+        <!-- animate__zoomIn -->
         <div class="form-box">
           <div class="button-box">
             <div id="btn"></div>
@@ -128,39 +123,56 @@
           </div>
           <div id="entrar" class="input-group">
             <input
+              v-model="encomenda.nome"
               type="text"
               class="form-control input-field"
-              id="emailUsuario"
+              id="nomeCliente"
+              placeholder="Informe seu nome"
+              required
+            />
+            <input
+              v-model="encomenda.email"
+              type="email"
+              class="form-control input-field mt-4"
+              id="emailCliente"
               placeholder="Digite o seu email"
               required
             />
-            <div class="container-fluid">
-              <div class="mt-2">
+            <div class="container">
+              <div class="mt-3">
                 <div class="col-12">
                   <label class="">Quantidade de caixas de ovos</label>
                   <input
+                    v-model="encomenda.quantidade"
                     type="number"
-                    class="form-control"
+                    class="form-control input-field"
                     min="0"
+                    id="quantidade"
                     oninput="validity.valid||(value='');"
-                    placeholder=""
+                    placeholder="Digite a quantidade"
                   />
                 </div>
-                <div class="col-12 mt-2">
+                <!-- <div class="col-12 mt-2">
+                  <span>{{ totalPagar() }}</span>
                   <label class="">Total a pagar</label>
                   <input
                     type="number"
                     class="form-control"
                     placeholder=""
+                    id="totalpagar"
                     min="0"
                     oninput="validity.valid||(value='');"
                     readonly
                   />
-                </div>
+                </div> -->
               </div>
             </div>
-            <div class="container pt-5">
-              <button type="button" class="submit-btn mt-3 btn btn-success">
+            <div class="container pt-4">
+              <button
+                @click="encomendar()"
+                type="button"
+                class="submit-btn mt-3 btn btn-success"
+              >
                 Encomendar
               </button>
             </div>
@@ -181,9 +193,9 @@
                   com um click
                 </p>
                 <p class="animate__animated animate__zoomIn animate__delay-3s">
-                  sem sair de casa por <br>
+                  sem sair de casa por <br />
                   <span v-for="produto in produtos" :key="produto.id">
-                    {{ produto.precoUnitario +','+'00 kz' }}
+                    {{ produto.precoUnitario + "," + "00 kz" }}
                   </span>
                 </p>
               </h1>
@@ -548,20 +560,26 @@ export default {
   data() {
     return {
       cliente: {
-        nome: '',
-        numeroTelefone: '',
-        email: '',
-        provincia: '',
-        municipio: '',
-        bairro: '',
-        numeroCasa: '',
-        senha: '',
+        nome: "",
+        numeroTelefone: "",
+        email: "",
+        provincia: "",
+        municipio: "",
+        bairro: "",
+        numeroCasa: "",
+        senha: "",
         isAdmin: false,
       },
       produtos: [],
       produto: {
-        precoUnitario: '',
+        precoUnitario: "",
       },
+      encomenda: {
+        nome: "",
+        email: "",
+        descricao: "",
+      },
+      encomendas: [],
     };
   },
   components: {
@@ -569,13 +587,43 @@ export default {
     Footer,
   },
   methods: {
+    encomendar() {
+      if (!this.nome || !this.email) {
+        this.$swal("Erro!", "Por favor preencha os campos", "error");
+        return;
+      }
+      let novaEncomenda = {
+        nome: this.encomenda.nome,
+        email: this.encomenda.email,
+      };
+      this.axios
+        .post("http://localhost:3000/encomendas", novaEncomenda)
+        .then((response) => {
+          if (response.status === 200) {
+            this.$swal(
+              "Sucesso!",
+              "Parabéns você realizou a sua encomenda com sucess",
+              "success"
+            );
+            this.limparInputs();
+          } else {
+            this.$swal(
+              "Up´s!",
+              "Não foi possível fazer a encomenda, verifique os dados",
+              "error"
+            );
+          }
+        });
+    },
     listarProdutos() {
       this.axios.get("http://localhost:3000/produtos").then((response) => {
         this.produtos = response.data.data;
       });
     },
-    mostrarPreco() {
-      let p = this.detalhesProdutos;
+    totalPagar() {
+      for (let i = 0; i < this.produtos; i++) {
+        console.log(this.produtos[3]);
+      }
     },
     cadastrarCliente() {
       if (
@@ -606,6 +654,7 @@ export default {
         .post("http://localhost:3000/clientes", newCliente)
         .then((response) => {
           if (response.status === 200) {
+            this.listarProdutos();
             this.limparInputs();
             this.$swal("Sucesso!", "Cadastrado com sucesso", "success");
           } else {

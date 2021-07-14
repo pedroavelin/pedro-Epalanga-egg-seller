@@ -1,10 +1,9 @@
 const router = require('express').Router()
 const db = require('../../db')
-const auth = require('../../middlewares/auth')
 
 router.get('/', (_, res) => {
     // listar os "Encomendas" que estão na BD
-    db.query('select u.nome, pro.descricao, pro.precoUnitario, pro.quantidade, t.tamanho, p.totalPago, e.estado, enc.dataEncomenda, u.numeroTelefone from clientes cli join usuarios u on(cli.usuarios_id = u.id) join clientes_has_enderecos ce on(ce.clientes_id = cli.id) join enderecos en on(ce.enderecos_id = en.id) join colaboradores col on(col.usuarios_id = u.id) join encomendas enc on(enc.colaborador_id = col.id) join estados e on(enc.estados_id = e.id) join pagamentos p on(enc.pagamentos_id = p.id) join produtos pro on(enc.produtos_id = pro.id) join tamanhos t on(pro.tamanhos_id = t.id)', (error, results, _) => {
+    db.query('select u.nome, u.email, pro.descricao,  pro.precoUnitario, ie.quantidade, e.estado, u.numeroTelefone, enc.dataEncomenda from itensdasencomendas ie join encomendas enc on(ie.encomendas_id = enc.id) join estados e on(enc.estados_id = e.id) join clientes cli on(enc.clientes_id = cli.id) join usuarios u on (cli.usuarios_id = u.id) join produtos pro on(enc.produtos_id = pro.id) order by enc.dataEncomenda desc', (error, results) => {
         if (error) {
         throw error
     }
@@ -27,10 +26,12 @@ router.get('/:id', (req, res) => {
     })
 })
 
-// Inserindo um novo usuário 
 router.post('/', (req, res) => {
-    const usuario = req.body
-    db.query('INSERT INTO usuarios SET ?', [usuario], (error, results, _) => {
+  const usuario = {
+      nome: req.body.nome,
+      email: req.body.email
+  }
+    db.query('INSERT INTO encomendas SET ?', [usuario], (error, results, _) => {
         if (error) {
             throw error
         }
@@ -38,7 +39,6 @@ router.post('/', (req, res) => {
     });
 })
 
-// Eliminando usuario "ID"
 router.delete('/:id', (req, res) => {
     const { id } = req.params
 
@@ -50,7 +50,6 @@ router.delete('/:id', (req, res) => {
     })
 })
 
-// Atualizar usuário
 router.put('/:id', (req, res) => {
     const { id } = req.params
 

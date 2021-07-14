@@ -253,12 +253,11 @@ export default {
      return  moment(separarData, 'YYYY-MM-DDTHH:mm:ss').format('DD-MM-YYYY')
 
     },
-    atualizarProduto() {
-      this.axios.put("http://localhost:3000/produtos").then((response) => {
-        console.log(response);
-      });
-    },
-    // Obs: Não está funcionando corretamente
+    // atualizarProduto() {
+    //   this.axios.put("http://localhost:3000/produtos").then((response) => {
+    //     console.log(response);
+    //   });
+    // },
     eliminarProduto(id) {
       this.axios
         .delete(`http://localhost:3000/produtos/` + id)
@@ -282,7 +281,6 @@ export default {
       this.axios
         .post("http://localhost:3000/produtos", newProduto)
         .then((response) => {
-          console.log(response);
           if (response.status === 200) {
             this.listarProdutos();
             this.limparInputs();

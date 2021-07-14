@@ -58,14 +58,22 @@ export default {
   data() {
     return {
       usuario: {
-        email: '',
-        senha: '',
+        email: "",
+        senha: "",
       },
     };
   },
 
   methods: {
     login() {
+      // if (!this.email || !this.senha) {
+      //   this.$swal(
+      //     "Erro!!",
+      //     "Seja bem vindo",
+      //     "success"
+      //   )
+        
+      // }
       let userLogin = {
         email: this.usuario.email,
         senha: this.usuario.senha,
@@ -76,7 +84,7 @@ export default {
           console.log(response);
           if (response.status === 200) {
             this.limparInputs();
-            this.$router.push("/encomendas")
+            this.$router.push("/encomendas");
           } else {
             this.$swal("Erro!!", "Verifique as suas credênciais", "error");
           }
@@ -84,8 +92,8 @@ export default {
     },
     limparInputs() {
       this.usuario = {
-        email: '',
-        senha: '',
+        email: "",
+        senha: "",
       };
     },
   },

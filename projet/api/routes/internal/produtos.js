@@ -55,7 +55,7 @@ router.post('/', (req, res) => {
 router.delete('/:id', (req, res) => {
   const { id } = req.params
 
-  db.query('DELETE FROM produtos WHERE id = ?', [id], (error, results, _) => {
+  db.query('DELETE FROM produtos WHERE id = ?', [id], (error, results) => {
     if (error) {
       throw error
     }
@@ -66,13 +66,8 @@ router.delete('/:id', (req, res) => {
 // Atualizar Produto
 router.put('/:id', (req, res) => {
   const { id } = req.params
-
   const produto = req.body
-  // console.log(id)
-  // console.log(produto.descricao)
-  var sql = "UPDATE produtos set descricao =?, precoUnitario=?, quantidade=?   WHERE id = ?"
-  db.query(sql, [produto.descricao, produto.precoUnitario, produto.quantidade,id], (error, results) => {
-
+  db.query("UPDATE produtos SET descricao = ?, precoUnitario = ?, quantidade = ?   WHERE id = ?", [produto.descricao, produto.precoUnitario, produto.quantidade, id], (error, results) => {
     if (error) {
       throw error
     }
