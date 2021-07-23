@@ -69,7 +69,7 @@
                           <div class="col-lg-6">
                             <div class="mb-2">
                               <input
-                                v-model="produto.descricao"
+                                v-model="produto.nome"
                                 type="text"
                                 class="form-control py-1"
                                 aria-label="file example"
@@ -106,7 +106,7 @@
                           </div>
 
                           <div class="col-lg-6">
-                            <div class="mb-2">
+                            <!-- <div class="mb-2">
                               <input
                                 v-model="produto.tamanho"
                                 type="text"
@@ -116,19 +116,24 @@
                                 required
                               />
                               <div class="invalid-feedback">Tamanho</div>
-                            </div>
-                            <!-- <div class="mb-2">
+                            </div> -->
+                            <div class="mb-2">
                               <select
                                 class="form-select p  y-1"
-                                required
                                 aria-label="select example"
+                                v-model="tamanho.tamanhos_id"
                               >
-                                <option value="">Tipo</option>
-                                <option value="1">M</option>
-                                <option value="2">G</option>
+                                <option
+                                v-for="tam in tamanhos" 
+                                :key="tam.id"
+                                :value="tam.id"
+                                selected
+                                > 
+                                {{tam.tamanho}} 
+                                </option>
                               </select>
                               <div class="invalid-feedback">Tipo</div>
-                            </div> -->
+                            </div>
                           </div>
                         </div>
                       </form>
@@ -188,7 +193,7 @@
                     </thead>
                     <tbody class="text-center">
                       <tr v-for="produto in produtos" :key="produto.id">
-                        <td>{{ produto.descricao }}</td>
+                        <td>{{ produto.nome }}</td>
                         <td>{{ produto.precoUnitario }}</td>
                         <td>{{ produto.quantidade }}</td>
                         <td>{{ produto.tamanho }}</td>
@@ -238,16 +243,25 @@ export default {
     return {
       modalIsOpen: false,
       produto: {
-        id: null,
-        descricao: '',
+        id: '',
+        nome: '',
         precoUnitario: '',
         quantidade: '',
         tamanho: '',
       },
       produtos: [],
+      tamanho:{
+        tamanhos_id: null,
+      },
+      tamanhos:[]
     };
   },
   methods: {
+    listarTamanhos(){
+      this.axios.get("http://localhost:3000/produtos/selectBoxTamanhos").then((response)=>{
+        this.tamanhos = response.data.data
+      })
+    },
     formantarData(data){
       let separarData = data.split('.')[0]
      return  moment(separarData, 'YYYY-MM-DDTHH:mm:ss').format('DD-MM-YYYY')
@@ -272,7 +286,7 @@ export default {
     },
     cadastrarProd() {
       let newProduto = {
-        descricao: this.produto.descricao,
+        nome: this.produto.nome,
         precoUnitario: this.produto.precoUnitario,
         quantidade: this.produto.quantidade,
         tamanho: this.produto.tamanho
@@ -291,7 +305,7 @@ export default {
     },
     editProduto() {
       let newProduto = {
-        descricao: this.produto.descricao,
+        nome: this.produto.nome,
         precoUnitario: this.produto.precoUnitario,
         quantidade: this.produto.quantidade,
         tamanho: this.produto.tamanho,
@@ -318,7 +332,7 @@ export default {
     
     limparInputs() {
       this.produto = {
-        descricao: "",
+        nome: "",
         precoUnitario: "",
         quantidade: "",
         tamanho: "",
@@ -327,7 +341,7 @@ export default {
     openEditarModalProd(produto){
       this.produto = {
         id: produto.id,
-        descricao: produto.descricao,
+        nome: produto.nome,
         precoUnitario: produto.precoUnitario,
         quantidade: produto.quantidade,
         tamanho: produto.tamanho
@@ -336,6 +350,7 @@ export default {
   },
   created() {
     this.listarProdutos();
+    this.listarTamanhos();
   },
   fecharModal() {
     this.modalIsOpen = false;

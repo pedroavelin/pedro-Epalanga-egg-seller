@@ -1,5 +1,4 @@
 const db = require("../db")
-
 module.exports = (req, res, next) => {
   // const authorization = req.headers('Authorization')
 

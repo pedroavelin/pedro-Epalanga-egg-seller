@@ -10,7 +10,7 @@ module.exports = (req, res) => {
   }).then((value) => {
     db.query('SELECT * FROM usuarios WHERE email = ? AND isAdmin !=0', [value.email], (error, results) => {
       if (results.length === 0) {
-        res.status(400).send('Não foi possível encontrar nenhuma conta que corresponda ao e-mail e senha fornecidos')
+        res.status(400).send('Não foi possível encontrar uma conta que corresponda ao e-mail e senha fornecidos')
       } else {
         bcrypt.compare(value.senha, results[0].senha)
           .then((match) => {

@@ -4,7 +4,7 @@ const auth = require('../../middlewares/auth')
 
 router.get('/', (_, res) => {
   // listar os "Produtos" que estão na BD
-  db.query('SELECT p.id, p.descricao, p.precoUnitario, p.quantidade, t.tamanho, p.dataRegistro from produtos p join tamanhos t on (p.tamanhos_id = t.id)', (error, results, _) => {
+  db.query('SELECT p.id, p.nome, p.precoUnitario, p.quantidade, t.descricao, p.dataRegistro from produtos p join tamanhos t on (p.tamanhos_id = t.id)', (error, results, _) => {
     if (error) {
       throw error
     }
@@ -15,11 +15,23 @@ router.get('/', (_, res) => {
   })
 })
 
+// trazer tamanhos
+router.get('/selectBoxTamanhos', (req, res) => {
+  // listar os tamanhos do "Ovo" no "select" 
+  db.query('select * from tamanhos order by id asc', (error, results, _) => {
+    if (error) {
+      throw error
+    }
+    res.send({
+      data: results
+    } );
+  })
+})
 router.get('/:id', (req, res) => {
-  // listar os "colaboradores" que estão na BD por "id"
+  // listar os "produtos" que estão na BD por "id"
   const { id } = req.params
 
-  db.query('SELECT p.id, p.descricao, p.precoUnitario, p.quantidade, t.tamanho, p.dataRegistro from produtos p join tamanhos t on (p.tamanhos_id = t.id) WHERE p.id  = ?', [id], (error, results, _) => {
+  db.query('SELECT p.id, p.nome, p.precoUnitario, p.quantidade, t.descricao, p.dataRegistro from produtos p join tamanhos t on (p.tamanhos_id = t.id) WHERE p.id  = ?', [id], (error, results, _) => {
     if (error) {
       throw error
     }
@@ -27,17 +39,18 @@ router.get('/:id', (req, res) => {
   })
 })
 
+
 // registar um novo Produto 
 router.post('/', (req, res) => {
   const tamanho = {
-    tamanho: req.body.tamanho
+    descricao: req.body.descricao
   }
   db.query('INSERT INTO tamanhos SET ?', [tamanho], (error, results, _) => {
     if (error) {
       throw error
     }
     const produto = {
-      descricao: req.body.descricao,
+      nome: req.body.nome,
       precoUnitario: req.body.precoUnitario,
       quantidade: req.body.quantidade,
       tamanhos_id: results.insertId
@@ -67,7 +80,7 @@ router.delete('/:id', (req, res) => {
 router.put('/:id', (req, res) => {
   const { id } = req.params
   const produto = req.body
-  db.query("UPDATE produtos SET descricao = ?, precoUnitario = ?, quantidade = ?   WHERE id = ?", [produto.descricao, produto.precoUnitario, produto.quantidade, id], (error, results) => {
+  db.query("UPDATE produtos SET nome = ?, precoUnitario = ?, quantidade = ?   WHERE id = ?", [produto.nome, produto.precoUnitario, produto.quantidade, id], (error, results) => {
     if (error) {
       throw error
     }

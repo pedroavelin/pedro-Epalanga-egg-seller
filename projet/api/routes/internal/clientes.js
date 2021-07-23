@@ -31,7 +31,7 @@ router.get('/selectBox', (req, res) => {
 router.get('/selectBoxProduto', (req, res) => {
   // listar o nome do "Produto" no "select" 
   //console.logg(selectBox'')
-  db.query('SELECT id, descricao from produtos', (error, results, _) => {
+  db.query('SELECT id, nome from produtos', (error, results, _) => {
     if (error) {
       throw error
     }

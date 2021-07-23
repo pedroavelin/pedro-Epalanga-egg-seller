@@ -13,7 +13,7 @@
               class="toggle-btn text-info"
               @click="entrar()"
             >
-              Entrar
+              Pedir
             </button>
             <button
               @click="registar()"
@@ -37,7 +37,7 @@
               </div>
               <div class="col-lg-6">
                 <input
-                  v-model="cliente.numeroTelefone"
+                  v-model="cliente.telefone"
                   type="number"
                   class="form-control input-field"
                   id="contacto"
@@ -124,6 +124,7 @@
           <div id="entrar" class="input-group">
             <div class="container">
               <div class="col-lg-12">
+                
                 <label for="" class="">Selecione apenas seu nome</label>
                 <select class="form-control" v-model="encomenda.cliente_id">
                   
@@ -136,13 +137,11 @@
                     {{ item.nome }}
                   </option>
                 </select>
+
               </div>
               <div class="col-lg-12 mt-3">
                 <label for="" class="">Selecionar produto</label>
                 <select class="form-control" v-model="produto.cliente_id">
-                  <option value="Selecione o produto">
-                    Selecione o produto
-                  </option>
                   <option
                     v-for="item in produtos"
                     :key="item.id"
@@ -647,19 +646,19 @@ export default {
     },
 
     cadastrarCliente() {
-      if (
-        !this.nome ||
-        !this.numeroTelefone ||
-        !this.email ||
-        !this.provincia ||
-        !this.municipio ||
-        !this.bairro ||
-        !this.numeroCasa ||
-        !this.senha
-      ) {
-        this.$swal("Erro!", "Por favor preencha os campos", "error")
-        return
-      }
+      // if (
+      //   !this.nome ||
+      //   !this.numeroTelefone ||
+      //   !this.email ||
+      //   !this.provincia ||
+      //   !this.municipio ||
+      //   !this.bairro ||
+      //   !this.numeroCasa ||
+      //   !this.senha
+      // ) {
+      //   this.$swal("Erro!", "Por favor preencha os campos", "error")
+      //   return
+      // }
       let newCliente = {
         nome: this.cliente.nome,
         numeroTelefone: this.cliente.numeroTelefone,
@@ -695,7 +694,6 @@ export default {
         senha: "",
       };
     },
-
     registar() {
       document.getElementById("entrar").style.left = "-400px";
       document.getElementById("registar").style.left = "50px";

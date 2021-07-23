@@ -5,6 +5,7 @@ import 'bootstrap/js/dist/button'
 import 'bootstrap/js/dist/modal'
 import 'bootstrap/js/dist/offcanvas'
 import 'animate.css/animate.min.css';
+
 import VueSweetalert2 from 'vue-sweetalert2'
 import 'sweetalert2/dist/sweetalert2.all'
 

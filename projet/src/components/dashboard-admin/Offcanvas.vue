@@ -14,7 +14,10 @@
           variant="light"
         ></b-icon>
         <h6 class="offcanvas-title p-2" id="offcanvasExampleLabel">
-          Pedro Epalanga
+          <span
+          v-for="usuario in usuarios" :key="usuario.id">
+          {{usuario.nome}}
+          </span>
         </h6>
         <button
           type="button"
@@ -134,9 +137,15 @@ export default {
   data() {
     return {
       name: "OffCanvas",
+      usuarios:[]
     };
   },
   methods: {
+    listarUsuaCol(){
+      this.axios.get("http://localhost:3000/usuarios").then((response)=>{
+        this.usuarios = response.data.data
+      })
+    },
     mudarCor(id) {
       // classList: Permite a manipulação do atributo de conteúdo da classe do elemento como um conjunto de tokens separados por espaço em branco por meio de um objeto DOMTokenList.
       document.getElementsByClassName("active")[0].classList.remove("active");

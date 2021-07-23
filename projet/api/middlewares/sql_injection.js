@@ -1,21 +1,21 @@
 // Sql_ijection => É o código responsável por lidar com a proteção de Sql_Injection
-const {sanitize} = require('indicative/sanitizer')
+const { sanitize } = require('indicative/sanitizer')
 
-module.exports = (req, res, next) =>{
-    
-    const sanitizers = {}
+module.exports = (req, res, next) => {
 
-    for (const key in req.body) {
-        sanitizers[key] = 'escape'
-    }
+  const sanitizers = {}
 
-    sanitize(req.body, sanitizers)
+  for (const key in req.body) {
+    sanitizers[key] = 'escape'
+  }
 
-    for (const key in req.require) {
-        sanitizers[key] = 'escape'
-    }
+  sanitize(req.body, sanitizers)
 
-    sanitize(req.require, sanitizers)
+  for (const key in req.require) {
+    sanitizers[key] = 'escape'
+  }
 
-    next()
+  sanitize(req.require, sanitizers)
+
+  next()
 }

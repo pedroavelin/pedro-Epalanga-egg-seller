@@ -64,7 +64,7 @@
                         :key="colaborador.id"
                       >
                         <td scope="row">{{ colaborador.nome }}</td>
-                        <td>{{ colaborador.numeroTelefone }}</td>
+                        <td>{{ colaborador.telefone }}</td>
                         <td>{{ colaborador.email }}</td>
                         <td>{{ colaborador.provincia }}</td>
                         <td>{{ colaborador.municipio }}</td>
@@ -206,7 +206,7 @@
                   </div>
                   <div class="col-lg-6 mt-2">
                     <input
-                      v-model="colaborador.numeroCasa"
+                      v-model="colaborador.numeroDaCasa"
                       type="text"
                       class="form-control py-1"
                       aria-label="file example"
@@ -281,7 +281,7 @@ export default {
     return {
       colaborador: {
         nome: "",
-        numeroTelefone: "",
+        telefone: "",
         email: "",
         senha: "",
         provincia: "",
@@ -304,12 +304,12 @@ export default {
     cadastrarColaborador() {
       let newColaboradores = {
         nome: this.colaborador.nome,
-        numeroTelefone: this.colaborador.numeroTelefone,
+        numeroTelefone: this.colaborador.telefone,
         email: this.colaborador.email,
         provincia: this.colaborador.provincia,
         municipio: this.colaborador.municipio,
         bairro: this.colaborador.bairro,
-        numeroCasa: this.colaborador.numeroCasa,
+        numeroCasa: this.colaborador.numeroDaCasa,
         salario: this.colaborador.salario,
         senha: this.colaborador.senha,
         isAdmin: this.colaborador.isAdmin,
@@ -319,7 +319,7 @@ export default {
         .then((response) => {
           //  console.log(response);
           if (response.status === 200) {
-            this.$swal("Up´s!", "Erro a cadastrar", "success");
+            this.$swal("success!", "Cadastrado com sucesso", "success");
             this.listarColaboradores();
             this.limparInputCol();
           } else {
@@ -330,7 +330,7 @@ export default {
     limparInputCol() {
       this.colaborador = {
         nome: "",
-        numeroTelefone: "",
+        telefone: "",
         email: "",
         provincia: "",
         municipio: "",

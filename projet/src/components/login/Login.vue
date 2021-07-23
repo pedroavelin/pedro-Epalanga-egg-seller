@@ -17,7 +17,7 @@
               <div class="offset-1 col-lg-10">
                 <input
                   v-model="usuario.email"
-                  type="text"
+                  type="email"
                   class="input px-3"
                   placeholder="Email do usuário"
                   required
@@ -30,7 +30,7 @@
                   v-model="usuario.senha"
                   type="password"
                   class="input px-3"
-                  placeholder="Senha"
+                  placeholder="Senha do usuário"
                   required
                 />
               </div>
@@ -66,29 +66,26 @@ export default {
 
   methods: {
     login() {
-      // if (!this.email || !this.senha) {
-      //   this.$swal(
-      //     "Erro!!",
-      //     "Seja bem vindo",
-      //     "success"
-      //   )
-        
-      // }
-      let userLogin = {
-        email: this.usuario.email,
-        senha: this.usuario.senha,
-      };
+      if (this.email !='' || this.senha !='') {
+        this.$swal("Erro", "Prencha os campos corretamente", "error");
+      }else{
+        let userLogin = {
+          email: this.usuario.email,
+          senha: this.usuario.senha
+        };
+
       this.axios
         .post("http://localhost:3000/login", userLogin)
         .then((response) => {
           console.log(response);
           if (response.status === 200) {
-            this.limparInputs();
             this.$router.push("/encomendas");
+            this.limparInputs();
           } else {
             this.$swal("Erro!!", "Verifique as suas credênciais", "error");
           }
         });
+      }
     },
     limparInputs() {
       this.usuario = {

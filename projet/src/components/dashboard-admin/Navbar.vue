@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div>
     <!-- inicio sidebar     -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-danger fixed-top">
       <div class="container-fluid">
@@ -46,7 +46,10 @@
             variant="light"
           ></b-icon>
         </button>
-        <div class="collapse navbar-collapse me-auto" id="navbarSupportedContent">
+        <div
+          class="collapse navbar-collapse me-auto"
+          id="navbarSupportedContent"
+        >
           <ul class="navbar-nav mb-2 mb-lg-0 d-flex ms-auto">
             <li class="nav-item dropdown">
               <a
@@ -74,9 +77,11 @@
                 <li><hr class="dropdown-divider" /></li>
                 <!-- gear -->
                 <li>
-                  <a class="dropdown-item" href="#"
-                    ><b-icon icon="power" scale="1"></b-icon> Sair</a
-                  >
+                  <router-link to="/Login">
+                    <a class="dropdown-item" href="#"
+                      ><b-icon icon="power" scale="1"></b-icon> Sair</a
+                    >
+                  </router-link>
                 </li>
               </ul>
             </li>
@@ -90,11 +95,8 @@
 
 <script>
 export default {
-  computed:{
-   
-  }
+  computed: {},
 };
-
 </script>
 
 <style>
